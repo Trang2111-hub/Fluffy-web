@@ -1,0 +1,118 @@
+.footer {
+background-color: var(--primary-color);
+color: white;
+padding: 25px 0;
+font-size: 14px;
+}  
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* max-width: 1300px; */
+    margin: 0 auto;
+    column-gap: 164px;
+    margin: auto 100px;
+}
+
+.footer-left{
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+}
+
+.footer-right{
+    display: flex;
+    column-gap: 80px;
+}
+
+.footer-rigth-column{
+    max-width: 30%;
+}
+
+.footer-rigth-column h3{
+    margin-bottom: 1.5rem;
+}
+
+.footer-rigth-column li{
+    margin: 0.5rem 0;
+}
+
+.footer-right i {
+    font-size: 16px; /* Kích thước icon */
+    color: white;
+  }
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.contact li{
+    display: flex;
+    
+}
+
+.intro h3{
+    font-size: 24px;
+}
+
+.intro p{
+    text-align: justify;
+}
+
+p, li {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* Social icons */
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.social-icons a {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    border-radius: 50%;
+}
+
+
+/* Icons styling */
+.fas, .fab {
+    margin-right: 8px;
+}
+
+hr{
+    color: white;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+/* Copyright */
+.footer-bottom {
+    text-align: center;
+}
+
+  
+  
