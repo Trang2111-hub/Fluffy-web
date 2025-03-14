@@ -72,7 +72,7 @@
     
         <!-- Mô tả sản phẩm -->
         <section class="product-description">
-          <h2 class="description-title">Mô tả sản phẩm</h2>
+          <h2 class="section-title">Mô tả sản phẩm</h2>
     
           <p class="description-text">
             Gấu bông bạch tuộc đã từng làm mưa làm gió một thời với 2 sắc thái biểu
@@ -93,7 +93,7 @@
           <button class="read-more-button">
             <span>Xem thêm</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/7513e7915d83ef26bfb59cab8087265ef34719d7666e407c7b72cf7d71aaeea5?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+              src="../../assets/icons/read_more.png"
               class="read-more-icon"
               alt="Read more"
             />
@@ -102,17 +102,19 @@
     
         <!-- Đánh giá sản phẩm -->
         <section class="reviews-section">
-          <h2 class="reviews-title">Đánh giá sản phẩm</h2>
+          <h2 class="section-title">Đánh giá sản phẩm</h2>
     
           <div class="reviews-header">
             <div class="average-rating">
               <div class="rating-score-container">
                 <span class="rating-score">4.8</span>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/6e4825d916b62ede75fbd4eff24f118a99ef77f145d6ddefe26b84d17f68a310?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="rating-stars"
-                  alt="Rating stars"
-                />
+                <div class="rating-stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
               </div>
               <span class="total-reviews">15 đánh giá</span>
             </div>
@@ -120,11 +122,9 @@
             <div class="rating-breakdown">
               <div class="rating-row">
                 <span class="star-count">5</span>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f10568d231533c8577cfb56260c6aca68ea64ca4c31bf87d364f2ad63d3bd172?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="star-icon"
-                  alt="Star"
-                />
+                <div class="star-icon">
+                  <i class="fas fa-star"></i>
+                </div>
                 <div class="progress-bar">
                   <div class="progress-fill" style="width: 80%"></div>
                 </div>
@@ -133,11 +133,9 @@
     
               <div class="rating-row">
                 <span class="star-count">4</span>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f10568d231533c8577cfb56260c6aca68ea64ca4c31bf87d364f2ad63d3bd172?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="star-icon"
-                  alt="Star"
-                />
+                <div class="star-icon">
+                  <i class="fas fa-star"></i>
+                </div>
                 <div class="progress-bar">
                   <div class="progress-fill" style="width: 20%"></div>
                 </div>
@@ -146,33 +144,27 @@
     
               <div class="rating-row">
                 <span class="star-count">3</span>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f10568d231533c8577cfb56260c6aca68ea64ca4c31bf87d364f2ad63d3bd172?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="star-icon"
-                  alt="Star"
-                />
+                <div class="star-icon">
+                  <i class="fas fa-star"></i>
+                </div>
                 <div class="progress-bar"></div>
                 <span class="rating-count">0 đánh giá</span>
               </div>
     
               <div class="rating-row">
                 <span class="star-count">2</span>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f10568d231533c8577cfb56260c6aca68ea64ca4c31bf87d364f2ad63d3bd172?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="star-icon"
-                  alt="Star"
-                />
+                <div class="star-icon">
+                  <i class="fas fa-star"></i>
+                </div>
                 <div class="progress-bar"></div>
                 <span class="rating-count">0 đánh giá</span>
               </div>
     
               <div class="rating-row">
                 <span class="star-count">1</span>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f10568d231533c8577cfb56260c6aca68ea64ca4c31bf87d364f2ad63d3bd172?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="star-icon"
-                  alt="Star"
-                />
+                <div class="star-icon">
+                  <i class="fas fa-star"></i>
+                </div>
                 <div class="progress-bar"></div>
                 <span class="rating-count">0 đánh giá</span>
               </div>
@@ -182,7 +174,9 @@
               <p class="review-prompt">
                 Chia sẽ đánh giá của bạn về sản phẩm này
               </p>
-              <button class="write-review-button">Viết đánh giá</button>
+              <button class="write-review-button">
+                <img src="../../assets/icons/write_review.png" alt="Write" class="write-icon">
+                Viết đánh giá</button>
             </div>
           </div>
     
@@ -190,11 +184,13 @@
             <article class="review-item">
               <div class="review-header">
                 <h3 class="reviewer-name">Mẫn Nhi</h3>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/9051a4375d19726a1f6afe89efb1fdb3c18ee4c1a71d372d94532ab976340cf6?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="review-rating"
-                  alt="5 stars"
-                />
+                <div class="review-rating"> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                </div>
                 <div class="verified-purchase">
                   <span>Đã mua hàng online</span>
                 </div>
@@ -209,12 +205,12 @@
     
               <div class="review-images">
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ffbc5cac847d40adb960e5ac8b499d7ca1fe0c2684614cdd5aa6c4945726f8cb?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741704703/feedback3_ebyj04.jpg"
                   class="review-image"
                   alt="Review image"
                 />
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4fee5503f3170520376a5c1911e3b4f72dbf71da29b69bf560727937c9c407fe?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741704704/feedback4_diwnbl.jpg"
                   class="review-image"
                   alt="Review image"
                 />
@@ -224,17 +220,19 @@
             <article class="review-item">
               <div class="review-header">
                 <h3 class="reviewer-name">Lan Nguyễn</h3>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/e6148a3d22add89d23e003d0f5b5c3054137a9b85b014bdc6a8235da2005bec4?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="review-rating"
-                  alt="5 stars"
-                />
+                <div class="review-rating"> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                </div>
                 <div class="verified-purchase">
                   <span>Đã mua hàng online</span>
                 </div>
               </div>
     
-              <p class="review-date">2024-10-07 14:51 | Phân lo���i hàng: Nâu-45cm</p>
+              <p class="review-date">2024-10-07 14:51 | Phân loại hàng: Nâu-45cm</p>
     
               <p class="review-content">
                 Gấu đẹp chuẩn form ko bị méo mó hay đứt chỉDây kéo mượt ko bị vướng
@@ -243,12 +241,12 @@
     
               <div class="review-images">
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/495bbeab25fb4e1b5bdb9b73f46a81cc2fa253baa9e9c6f50b7d5e6656a098ee?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741704704/feedback1_ufcp7g.jpg"
                   class="review-image"
                   alt="Review image"
                 />
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f5141faa20d947cf0f02ddae87c2188a3489757aafea59b0c29b50a0be1336b9?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741704703/capy_%C4%91eo_cap_wz9v6x.jpg"
                   class="review-image"
                   alt="Review image"
                 />
@@ -258,11 +256,13 @@
             <article class="review-item">
               <div class="review-header">
                 <h3 class="reviewer-name">Hiếu thứ ba</h3>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/376ff4b5f7e8eee6d208da63b3a53c694c886163de69d94fa258834735c68d44?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="review-rating"
-                  alt="5 stars"
-                />
+                <div class="review-rating"> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                </div>
                 <div class="verified-purchase">
                   <span>Đã mua hàng online</span>
                 </div>
@@ -279,12 +279,12 @@
     
               <div class="review-images">
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ffbc5cac847d40adb960e5ac8b499d7ca1fe0c2684614cdd5aa6c4945726f8cb?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741704704/capy2_xezphg.jpg"
                   class="review-image"
                   alt="Review image"
                 />
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4fee5503f3170520376a5c1911e3b4f72dbf71da29b69bf560727937c9c407fe?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741704704/feedback2_panqhn.jpg"
                   class="review-image"
                   alt="Review image"
                 />
@@ -294,11 +294,13 @@
             <article class="review-item">
               <div class="review-header">
                 <h3 class="reviewer-name">Huyền Trang</h3>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/e6148a3d22add89d23e003d0f5b5c3054137a9b85b014bdc6a8235da2005bec4?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                  class="review-rating"
-                  alt="5 stars"
-                />
+                <div class="review-rating"> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                  <i class="fas fa-star"></i> 
+                </div>
                 <div class="verified-purchase">
                   <span>Đã mua hàng online</span>
                 </div>
@@ -315,12 +317,12 @@
     
               <div class="review-images">
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f4378d6c72588402d36cbb3d584bff50a89cdfe2feaf2d5fe89a36dfce09bea?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741918431/capy_matcha_rp6nsg.jpg"
                   class="review-image"
                   alt="Review image"
                 />
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0c59c1e37d64bbff68577b54e84379374498491e18c69a4904546fe52b99cf4d?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                  src="https://res.cloudinary.com/dkci9bzkj/image/upload/v1741704704/capy2_xezphg.jpg"
                   class="review-image"
                   alt="Review image"
                 />
@@ -329,12 +331,15 @@
           </div>
     
           <div class="pagination">
+            <img src="../../assets/icons/previous.png" alt="Previous" class="page-review-nav">
             <span class="page-number active">1</span>
             <span class="page-number">2</span>
             <span class="page-number">3</span>
             <span class="page-number">4</span>
             <span class="page-number">5</span>
+            <img src="../../assets/icons/next.png" alt="Previous" class="page-review-nav">
           </div>
+          
         </section>
 
         <section class="related-products">
@@ -346,7 +351,7 @@
           <div class="products-slider">
             <button class="slider-nav prev-button">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/4eb11cfbfcd9f3ab7c800fb91778ed8ef6de424939ae2a640458feced05e718d?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                src="../../assets/icons/chevrons_left.png"
                 alt="Previous"
               />
             </button>
@@ -362,7 +367,7 @@
     
                   <div class="product-info">
                     <div class="product-details">
-                      <h3 class="product-title">Mèo Hoàng Thượng....</h3>
+                      <h3 class="product-card-title">Mèo Hoàng Thượng....</h3>
                       <span class="current-price">230,000đ</span>
                     </div>
     
@@ -391,7 +396,7 @@
     
                   <div class="product-info">
                     <div class="product-details">
-                      <h3 class="product-title">Mèo Hoàng Thượng....</h3>
+                      <h3 class="product-card-title">Mèo Hoàng Thượng....</h3>
                       <span class="current-price">230,000đ</span>
                     </div>
     
@@ -420,7 +425,7 @@
     
                   <div class="product-info">
                     <div class="product-details">
-                      <h3 class="product-title">Mèo Hoàng Thượng....</h3>
+                      <h3 class="product-card-title">Mèo Hoàng Thượng....</h3>
                       <span class="current-price">230,000đ</span>
                     </div>
     
@@ -449,7 +454,7 @@
     
                   <div class="product-info">
                     <div class="product-details">
-                      <h3 class="product-title">Mèo Hoàng Thượng....</h3>
+                      <h3 class="product-card-title">Mèo Hoàng Thượng....</h3>
                       <span class="current-price">230,000đ</span>
                     </div>
     
@@ -471,7 +476,7 @@
     
             <button class="slider-nav next-button">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d846f21c4ce9a54be48f9b1007592bb23dd63807e743c0c99cce2ca45deb8a64?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
+                src="../../assets/icons/chevrons_right.png"
                 alt="Next"
               />
             </button>
