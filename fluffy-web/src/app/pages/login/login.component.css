@@ -1,0 +1,112 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+}
+.logo-section {
+    flex: 1;
+    display: flex;
+    /* justify-content: center;
+    align-items: center;
+    text-align: center; */
+
+}
+.logo-section img {
+    width: 280px;      
+    height: 280px;     
+    object-fit: contain; 
+    margin-left: 150px;
+}
+.login-box {
+    flex: 1;
+    background: #D9D9D980;
+    padding: 30px;
+    max-width: 350px;
+    height: auto;
+    margin-top: 30px;
+    margin-right: 200px;
+}
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #EB5265;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+.input-group input {
+    width: 100%; 
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+.password-group {
+    position: relative;
+}
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.forgot-password {
+    color: #EB5265;
+    text-decoration: none;
+    font-weight: bold ;
+}
+.login-btn {
+    width: 100%;
+    background-color: #EB5265;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.register{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.register a{
+    text-decoration: none;
+    color: #EB5265;
+    font-weight: bold;
+
+}
+.hr {
+    border: 1px solid #EB5265;
+    margin-bottom: 10px; 
+}
+.social-login p {
+    font-size: 18px;
+    font-weight: bold; 
+    margin-top: 5px; 
+    text-align: center; 
+}
+.social-buttons {
+    display: flex;
+    justify-content: center; 
+}
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    width: 150px;
+    height: 40px; 
+}
+.social-btn img {
+    width: 100%; 
+    height: auto;
+}

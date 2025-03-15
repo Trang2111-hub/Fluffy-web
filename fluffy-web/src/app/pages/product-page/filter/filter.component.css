@@ -1,0 +1,106 @@
+/* product-filter.component.css */
+.filter-container {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  padding: 10px;
+}
+
+.filter-header {
+  margin-bottom: 15px;
+}
+
+.filter-title {
+  display: flex;
+  align-items: center;
+}
+
+.title-text {
+  color: #e45a77;
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.filter-section {
+  margin: 10px 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.non-collapsible {
+  cursor: default;
+}
+
+.plus-icon, .minus-icon {
+  margin-right: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.section-content.expanded {
+  max-height: 500px;
+}
+
+.filter-divider {
+  height: 1px;
+  background-color: #e5e5e5;
+  margin: 15px 0;
+}
+
+.price-range {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.price-input {
+  width: 120px;
+  padding: 8px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.price-separator {
+  margin: 0 10px;
+  color: #777;
+}
+
+.color-option {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.color-option input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.apply-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e45a77;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.apply-button:hover {
+  background-color: #d6405f;
+}

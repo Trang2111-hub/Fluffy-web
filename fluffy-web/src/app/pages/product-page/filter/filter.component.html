@@ -1,0 +1,98 @@
+<!-- product-filter.component.html -->
+<div class="filter-container">
+  <div class="filter-header">
+    <div class="filter-title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e45a77">
+        <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+      </svg>
+      <span class="title-text">Bộ lọc</span>
+    </div>
+  </div>
+  
+  <div class="filter-section">
+    <div class="section-header" (click)="toggleSection('category')">
+      <span class="plus-icon">+</span>
+      <span>Danh mục sản phẩm</span>
+    </div>
+    <div class="section-content" [ngClass]="{'expanded': expandedSections.category}">
+      <div class="category-option">
+        <input type="checkbox" id="gau-bong">
+        <label for="gau-bong"> Gấu bông</label>
+      </div>
+      <div class="category-option">
+        <input type="checkbox" id="thu-bong">
+        <label for="thu-bong"> Thú bông</label>
+      </div>
+      <div class="category-option">
+        <input type="checkbox" id="gau-bong-hh">
+        <label for="gau-bong-hh"> Gấu bông hoạt hình</label>
+      </div>
+    </div>
+  </div>
+  
+  <div class="filter-divider"></div>
+  
+  <div class="filter-section">
+    <div class="section-header non-collapsible" (click)="toggleSection('price')">
+      <span class="plus-icon">+</span>
+      <span>Khoảng giá</span>
+    </div>
+    <div class="section-content" [ngClass]="{'expanded': expandedSections.price}">
+      <div class="price-range">
+        <input type="text" class="price-input" placeholder="$ Từ">
+        <span class="price-separator">—</span>
+        <input type="text" class="price-input" placeholder="$ Đến">
+      </div>
+    </div>
+  </div>
+  
+  <div class="filter-divider"></div>
+  
+  <div class="filter-section">
+    <div class="section-header" (click)="toggleSection('color')">
+      <span class="plus-icon">+</span>
+      <span>Màu sắc</span>
+    </div>
+    <div class="section-content" [ngClass]="{'expanded': expandedSections.color}">
+      <div class="section-content expanded">
+        <div class="color-option">
+          <input type="checkbox" id="color-pink">
+          <label for="color-pink">Hồng</label>
+        </div>
+        <div class="color-option">
+          <input type="checkbox" id="color-red">
+          <label for="color-red">Đỏ</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="filter-divider"></div>
+  
+  <div class="filter-section">
+    <div class="section-header" (click)="toggleSection('size')">
+      <span class="plus-icon">+</span>
+      <span>Kích thước</span>
+    </div>
+    <div class="section-content" [ngClass]="{'expanded': expandedSections.size}">
+      <div class="size-option">
+        <input type="checkbox" id="size-s">
+        <label for="size-s">Size S (< 40cm)</label>
+      </div>
+      <div class="size-option">
+        <input type="checkbox" id="size-m">
+        <label for="size-m">Size M (40-80cm)</label>
+      </div>
+      <div class="size-option">
+      <div class="size-option">
+        <input type="checkbox" id="size-m">
+        <label for="size-m">Size L (>80cm)</label>
+      </div>
+      <div class="size-option">
+    </div>
+  </div>
+  
+  <div class="filter-divider"></div>
+</div>
+
+<button class="apply-button">ÁP DỤNG</button>
