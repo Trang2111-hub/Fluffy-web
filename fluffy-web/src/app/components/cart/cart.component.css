@@ -1,0 +1,205 @@
+/* ======================= 🌟 CÀI ĐẶT CHUNG 🌟 ======================= */
+body {
+    background-color: #ffffff; /* Nền xám nhạt */
+    font-family: Arial, sans-serif; /* Font chữ mặc định */
+}
+.container {
+    max-width: 786px; /* Giới hạn chiều rộng */
+    margin: 0 0 0 auto; /* Căn phải */
+    background-color: #fff; /* Nền trắng */
+    border: 1px solid #e5e7eb; /* Viền đỏ bao quanh */
+}
+
+/* ======================= 🛒 HEADER (TIÊU ĐỀ) 🛒 ======================= */
+.header, .promo-code, .total, .checkout {
+    padding: 16px; /* Khoảng cách bên trong */
+    border-bottom: 1px solid #e5e7eb; /* Viền dưới xám nhạt */
+}
+.header {
+    display: flex; /* Canh ngang */
+    justify-content: space-between; /* Trái - phải */
+    align-items: center; /* Căn giữa dọc */
+    border-bottom: 2px solid #000000; /* Viền dày hơn */
+}
+.header h1 {
+    color: #EB5265; /* Màu đỏ */
+    font-size: 1.875rem;
+    font-weight: bold;
+}
+.header button {
+    font-size: 2.5rem;
+    color: #000;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ======================= ✅ "CHỌN TẤT CẢ" & "XÓA TẤT CẢ" ✅ ======================= */
+.select-all {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    background-color: #EB5265; /* Màu nền đỏ */
+    color: #fff; /* Chữ trắng */
+    padding: 10px 16px; /* Thêm padding cho đẹp */
+    width: 100%; /* Đảm bảo fit toàn bộ khung */
+    box-sizing: border-box; /* Tránh padding làm thay đổi kích thước */
+}
+
+.select-all div {
+    display: flex;
+    justify-content: space-between; /* Cách đều hai bên */
+    align-items: center;
+    width: 100%; /* Trải rộng để căn đều */
+}
+
+.select-all input {
+    margin-right: 3px; /* Cách chữ "Chọn tất cả" */
+}
+
+.delete-all {
+    cursor: pointer; /* Hiển thị con trỏ khi di chuột */
+    margin-left: 8px; /* Cách chữ "Chọn tất cả" */
+}
+
+/* ======================= 🛍️ DANH SÁCH SẢN PHẨM 🛍️ ======================= */
+.cart-item {
+    display: flex; /* Canh ngang */
+    align-items: center; /* Căn giữa dọc */
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb; /* Viền ngăn cách từng sản phẩm */
+}
+.cart-item img {
+    width: 100px; height: 100px;
+    margin-right: 16px;
+}
+.cart-item-details {
+    flex: 1; /* Giãn ra toàn bộ khoảng trống còn lại */
+}
+.cart-item-details h2 {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #EB5265;
+    margin-bottom: 5px; /* Thêm khoảng cách dưới */
+}
+
+.cart-item-total {
+    margin: 25px; /* Thêm khoảng cách xung quanh */
+    border-left: 1px solid #EB5265; /* Kẻ lề trái màu đỏ */
+    padding-left: 16px; /* Thêm khoảng cách để chữ không dính vào lề */
+}
+
+/* ======================= 🔢 ĐIỀU CHỈNH SỐ LƯỢNG 🔢 ======================= */
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.cart-item-controls button, 
+.cart-item-controls input, 
+.cart-item-controls select {
+    border: 1px solid #EB5265; /* Viền đỏ */
+    padding: 8px 16px; /* Tăng padding để các phần tử lớn hơn */
+    margin-right: 8px;
+    background-color: #fef2f2; /* Màu nền nhẹ */
+    color: #EB5265; /* Màu chữ đỏ */
+    cursor: pointer; /* Khi di chuột vào sẽ có con trỏ */
+}
+
+.cart-item-controls input {
+    width: 30px; /* Kích thước ô nhập nhỏ gọn */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+.cart-item-controls select {
+    width: 120px; /* Kích thước select */
+    color: #EB5265; /* Màu chữ của select */
+    background-color: #fef2f2; /* Nền select */
+}
+
+.cart-item-controls button:hover,
+.cart-item-controls select:hover {
+    background-color: #EB5265; /* Nền đỏ khi hover */
+    color: white; /* Màu chữ trắng khi hover */
+}
+
+/* ======================= 💰 GIÁ SẢN PHẨM 💰 ======================= */
+.cart-item-prices {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+.cart-item-prices span {
+    font-size: 1rem;
+    font-weight: bold;
+}
+.cart-item-prices .original-price {
+    text-decoration: line-through; /* Gạch ngang giá cũ */
+    color: #6b7280; /* Màu xám */
+    margin-left: 16px;
+}
+.cart-item-prices .remove {
+    margin-left: auto; /* Đẩy về bên phải */
+    color: #EB5265; /* Màu đỏ */
+    cursor: pointer; /* Hover có hình bàn tay */
+}
+
+/* ======================= 🛒 TỔNG GIÁ SẢN PHẨM 🛒 ======================= */
+.cart-item-total {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #ef4444; /* Màu đỏ nổi bật */
+}
+
+/* ======================= 🎟️ MÃ KHUYẾN MÃI 🎟️ ======================= */
+.promo-code {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EB5265;
+    color: #fff;
+}
+.promo-code i {
+    margin-right: 8px;
+}
+.promo-code button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ======================= 💲 TỔNG TIỀN 💲 ======================= */
+.total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.total span {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+.total .total-amount {
+    color: #EB5265; /* Hiển thị tổng tiền nổi bật */
+}
+
+/* ======================= 🛒 NÚT THANH TOÁN 🛒 ======================= */
+.checkout button {
+    width: 100%; /* Nút rộng toàn bộ */
+    background-color: #EB5265; /* Màu nền đỏ */
+    color: #fff; /* Chữ trắng */
+    padding: 12px;
+    font-size: 1.125rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 81px; /* Bo tròn góc */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hiệu ứng mượt */
+}
+
+/* Hiệu ứng khi lia chuột vào */
+.checkout button:hover {
+    background-color: #EB5265; /* Màu đỏ đậm hơn */
+    transform: scale(1.05); /* Nút phóng to nhẹ */
+}
+

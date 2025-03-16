@@ -1,0 +1,131 @@
+body {
+    background-color: #f3f4f6; /* Đặt màu nền nhẹ nhàng cho trang */
+    margin: 0; /* Loại bỏ margin mặc định của trình duyệt */
+    font-family: Arial, sans-serif; /* Chọn font chữ chính cho toàn trang */
+}
+
+.header {
+    background-color: white; /* Màu nền của phần đầu trang */
+}
+
+.menu {
+    max-width: 1000px; /* Giới hạn chiều rộng tối đa của menu */
+    margin: 0 auto; /* Căn giữa menu trên màn hình */
+    padding: 5px 10px; /* Thêm khoảng đệm xung quanh */
+    display: flex; /* Sắp xếp các phần tử theo hàng ngang */
+    justify-content: space-between; /* Đưa các phần tử về hai đầu của menu */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+/* ===================== lOGO ===================== */
+
+.logo {
+    display: flex; /* Cho phép logo và text nằm cạnh nhau */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.logo img {
+    height: 50px; /* Thiết lập chiều cao cố định cho logo */
+    width: 50px; /* Thiết lập chiều rộng cố định cho logo */
+}
+
+.logo h1 {
+    color: #EB5265; /* Đặt màu chữ hồng đậm cho tiêu đề */
+    font-size: 1.25rem; /* Định cỡ chữ tiêu đề */
+    font-weight: bold; /* Làm đậm chữ */
+    margin: 0; /* Xóa margin mặc định của trình duyệt */
+    margin-left: 10px; /* Tạo khoảng cách giữa hình ảnh và tiêu đề */
+}
+
+.logo p {
+    color: #EB5265; /* Màu chữ */
+    font-size: 0.875rem; /* Giảm cỡ chữ của mô tả */
+    margin: 0; /* Xóa margin mặc định */
+    margin-left: 10px; /* Tạo khoảng cách với tiêu đề */
+}
+
+.search-bar {
+    position: relative; /* Cho phép icon tìm kiếm định vị tuyệt đối bên trong */
+}
+
+.search-bar input {
+    background-color: #e5e7eb; /* Đặt màu nền xám nhạt */
+    border-radius: 9999px; /* Bo tròn toàn bộ khung tìm kiếm */
+    padding: 10px 20px; /* Tăng vùng nhấn */
+    width: 250px; /* Định chiều rộng khung nhập */
+    border: none; /* Xóa viền mặc định */
+}
+.search-bar i {
+    position: absolute; /* Định vị icon tìm kiếm bên trong ô nhập */
+    right: 15px; /* Đặt icon ở bên phải */
+    top: 50%; /* Căn giữa icon theo chiều dọc */
+    transform: translateY(-50%); /* Điều chỉnh icon chính xác vào giữa */
+    color: #EB5265; /* Màu icon */
+}
+
+.nav-icons {
+    display: flex; /* Sắp xếp icon theo hàng ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    color: #000000; /* Màu chữ mặc định */
+}
+
+.nav-icons div {
+    display: flex; /* Đảm bảo mỗi nhóm icon và text nằm cùng một hàng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-left: 20px; /* Tạo khoảng cách giữa các nhóm icon */
+}
+
+.nav-icons i {
+    color: #EB5265; /* Màu hồng đậm cho icon */
+    margin-right: 5px; /* Tạo khoảng cách giữa icon và text */
+    font-size: 1.25rem; /* Đặt kích thước biểu tượng lớn */
+}
+.nav-icons span {
+    font-size: 0.75rem; 
+    margin-right: 5px; /* Tạo khoảng cách giữa icon và text */
+}
+
+/* ===================== THÀNH MENU ===================== */
+/* ===================== nav ===================== */
+.nav {
+    background-color: #EB5265; /* Đặt màu nền cho thanh điều hướng */
+    text-align: center; /* Căn giữa nội dung trong thanh điều hướng */
+}
+
+.nav div {
+    color: white; /* Màu chữ trắng để dễ đọc trên nền hồng */
+    display: inline-block; /* Giúp quản lý khoảng cách tốt hơn */
+    text-decoration: none; /* Loại bỏ gạch chân mặc định */
+}
+
+.nav a:hover {
+    transform: scale(1.1); /* Phóng to biểu tượng khi hover vào */
+    transition: transform 0.3s ease; /* Thêm hiệu ứng mượt mà khi phóng to */
+}
+
+/* ===================== MENU ITEM ===================== */
+.menu-item {
+    cursor: pointer; /* Hiển thị con trỏ khi hover vào mục menu */
+    flex-grow: 1; /* Đảm bảo menu-item có kích thước đều nhau */
+    text-align: center; /* Căn giữa nội dung bên trong */
+    min-width: 150px; /* Đảm bảo mỗi mục menu có kích thước tối thiểu */
+    padding: 10px 10px; /* Thêm padding cho các mục menu */
+}
+
+.menu-item div {
+    height: 100%;
+}
+
+.menu-item:hover {
+    background-color: #ab3b48; /* Đổi nền khi hover vào menu-item */
+}
+
+/* ===================== SUBMENU ===================== */
+.submenu {
+    display: none; /* Mặc định ẩn submenu */
+    position: absolute; /* Định vị submenu so với menu-item cha */
+    background-color: #F4D7C5; /* Màu nền be nhạt */
+    top: 120%; /* Hiển thị submenu ngay bên dưới menu-item */
+    left: 0; /* Căn submenu theo lề trái menu-item */
+    width: 100%; /* Đảm bảo submenu rộng bằng menu cha */
+    z-index: 999; /* Đảm bảo submenu hiển thị phía trên nội dung khác */
+}
