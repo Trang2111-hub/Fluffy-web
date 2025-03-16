@@ -1,0 +1,37 @@
+<div mat-dialog-content class="chatbox">
+    <div class="chat-header">
+      <h3>Trợ lý mua sắm</h3>
+      <button mat-icon-button (click)="closeChat()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  
+    <div class="chat-options">
+      <p>Bạn muốn nhận tư vấn từ:</p>
+      <div class="options">
+        <button mat-button (click)="selectAssistant('ai')">
+          <mat-icon>smart_toy</mat-icon> Trợ lý AI
+        </button>
+        <button mat-button (click)="selectAssistant('human')">
+          <mat-icon>group</mat-icon> Tư vấn viên
+        </button>
+      </div>
+    </div>
+  
+    <div class="chat-messages">
+      <div class="message bot">
+        <mat-icon>smart_toy</mat-icon>
+        <p>Xin chào! Mình là trợ lý AI của bạn tại Fluffy. Mình sẵn sàng giúp bạn với câu hỏi về chính sách và tìm kiếm sản phẩm.</p>
+      </div>
+    </div>
+  
+    <div class="chat-input">
+      <mat-form-field>
+        <input matInput placeholder="Nhập nội dung..." [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" />
+      </mat-form-field>
+      <button mat-icon-button (click)="sendMessage()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+</div>
+  
