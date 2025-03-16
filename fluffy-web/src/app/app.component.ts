@@ -11,11 +11,12 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { ChatboxComponent } from './components/chatbox/chatbox.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, ProductDetailComponent, LoginComponent, SignupComponent, PaymentComponent, HomePageComponent, CommonModule, ReactiveFormsModule, AccountSettingsComponent, ProductPageComponent],
+  imports: [RouterOutlet, FooterComponent, ProductDetailComponent, LoginComponent, SignupComponent, PaymentComponent, HomePageComponent, CommonModule, ReactiveFormsModule, AccountSettingsComponent, ProductPageComponent, ChatboxComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
