@@ -121,7 +121,7 @@ body {
     width: 120px;
     text-align: left;
   }
-  
+
   .form-group input, .dob-group select {
     flex: 1;
     padding: 10px;
