@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';  // Thêm FormsModule
+import { CartService } from '../../services/cart.service';
 
 interface Product {
   title: string;
@@ -25,11 +26,29 @@ export class CartComponent implements OnInit {
   products: Product[] = []; // Khai báo mảng sản phẩm
   totalAmount = 0;
   selectAll = false;
+  isOpen = false;
+  
+  @HostBinding('class.open')
+  get isOpenClass() {
+    return this.isOpen;
+  }
 
-  constructor() {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.fetchProducts();
+    
+    // Theo dõi trạng thái hiển thị của popup
+    this.cartService.isCartOpen$.subscribe(isOpen => {
+      this.isOpen = isOpen;
+      
+      // Khi mở giỏ hàng, ngăn scroll trên body
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    });
   }
 
   fetchProducts() {
@@ -46,6 +65,24 @@ export class CartComponent implements OnInit {
       .catch(error => {
         console.error('Lỗi khi lấy dữ liệu từ API:', error);
       });
+  }
+
+  // Đóng giỏ hàng
+  closeCart() {
+    this.cartService.closeCart();
+  }
+
+  // Ngăn đóng popup khi click vào nội dung
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
+
+  // Đóng popup khi nhấn ESC
+  @HostListener('document:keydown.escape')
+  onEscapePress() {
+    if (this.isOpen) {
+      this.closeCart();
+    }
   }
 
   updateTotalAmount() {

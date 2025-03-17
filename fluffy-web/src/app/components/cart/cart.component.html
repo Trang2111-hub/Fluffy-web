@@ -1,7 +1,11 @@
-<div class="container">
+<!-- Phần overlay tối nền -->
+<div class="cart-overlay" *ngIf="isOpen" (click)="closeCart()"></div>
+
+<!-- Phần nội dung giỏ hàng -->
+<div class="container" *ngIf="isOpen" (click)="stopPropagation($event)">
   <div class="header">
     <h1>Giỏ hàng</h1>
-    <button><i class="fas fa-times"></i></button>
+    <button (click)="closeCart()"><i class="fas fa-times"></i></button>
   </div>
 
   <div class="select-all">
@@ -12,7 +16,7 @@
   <div id="cart-container">
     <div *ngFor="let product of products" class="cart-item">
       <input type="checkbox" [(ngModel)]="product.selected" (change)="toggleSelectProduct(product)" class="product-checkbox" />
-      <img [src]="product.images[0]" alt="{{ product.title }}" width="100" height="100" />
+      <img [src]="product.images[0]" alt="{{ product.title }}" />
       <div class="cart-item-details">
         <h2>{{ product.title }}</h2>
         <div class="cart-item-controls">
