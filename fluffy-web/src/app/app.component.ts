@@ -4,7 +4,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "./components/header/header.component";
-import { CartService } from './services/cart.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-root',

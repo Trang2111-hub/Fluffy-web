@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';  // Thêm FormsModule
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../../services/cart.service';
 
 interface Product {
   title: string;
