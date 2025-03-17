@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductCardComponent } from '../product-card/product-card.component';
+import { ProductCardComponent } from '../../../components/product-card/product-card.component';
 
 // Add this interface before the component class
 interface Product {
