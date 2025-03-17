@@ -1,32 +1,8 @@
 <div class="product-grid">
-    <div class="product-card" *ngFor="let product of paginatedProducts">
-        <!-- Main product image -->
-        <div class="product-image-container">
-            <img [src]="product.image" [alt]="product.title" class="product-img">
-        </div>
-        
-        <!-- Product info section -->
-        <div class="product-info">
-            <h3 class="product-name">{{product.title}}</h3>
-            <div class="price-container">
-                <span class="sale-price">{{product.price | currency}}</span>
-            </div>
-        </div>
-        
-        <!-- Shopping actions -->
-        <div class="product-actions">
-            <div class="add-to-cart">
-                <i class="shopping-bag-icon"></i>
-                <span>Thêm vào giỏ hàng</span>
-            </div>
-            <button class="buy-now-btn">MUA NGAY</button>
-        </div>
-        
-        <!-- Heart icon -->
-        <button class="favorite-btn">
-            <i class="heart-icon"></i>
-        </button>
-    </div>
+    <app-product-card 
+        *ngFor="let product of paginatedProducts"
+        [product]="product">
+    </app-product-card>
 </div>
 
 <!-- Pagination -->
