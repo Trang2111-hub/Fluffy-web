@@ -6,6 +6,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
 import { CartComponent } from './components/cart/cart.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 export const routes: Routes = [
   { 
@@ -15,6 +16,10 @@ export const routes: Routes = [
   { 
     path: 'product/:id', 
     component: ProductDetailComponent 
+  },
+  { 
+    path: 'product-page', 
+    component: ProductPageComponent 
   },
   { 
     path: 'login', 
