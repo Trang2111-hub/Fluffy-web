@@ -1,24 +1,25 @@
-<div class="product-grid">
-    <app-product-card 
-        *ngFor="let product of paginatedProducts"
-        [product]="product">
-    </app-product-card>
-</div>
+<div class="product-list">
+    <div class="product-grid">
+        <div *ngFor="let product of paginatedProducts">
+            <app-product-card [product]="product"></app-product-card>
+        </div>
+    </div>
 
-<!-- Pagination -->
-<div class="pagination">
-    <button class="page-nav" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
-        <span class="arrow">‹</span>
-    </button>
-    
-    <button class="page-number" 
-            *ngFor="let page of getPageNumbers()"
-            [class.active]="page === currentPage"
-            (click)="goToPage(page)">
-        {{ page }}
-    </button>
-    
-    <button class="page-nav" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
-        <span class="arrow">›</span>
-    </button>
-</div>
+    <!-- Pagination -->
+    <div class="pagination">
+        <button class="page-nav" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+            <span class="arrow">‹</span>
+        </button>
+        
+        <button class="page-number" 
+                *ngFor="let page of getPageNumbers()"
+                [class.active]="page === currentPage"
+                (click)="goToPage(page)">
+            {{ page }}
+        </button>
+        
+        <button class="page-nav" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+            <span class="arrow">›</span>
+        </button>
+    </div>
+</div>  

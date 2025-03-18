@@ -8,8 +8,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class SortComponent {
   @Output() sortChange = new EventEmitter<string>();
 
-  onSortChange(event: any) {
-    const value = event.target.value;
-    this.sortChange.emit(value);
+  onSortChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    this.sortChange.emit(target.value);
   }
 }
