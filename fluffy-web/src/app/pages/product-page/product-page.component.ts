@@ -11,5 +11,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-page.component.css'
 })
 export class ProductPageComponent {
+  currentSortOrder: string = '';
 
+  onSortChange(sortOrder: string): void {
+    this.currentSortOrder = sortOrder; // Lưu lựa chọn sắp xếp
+  }
+
+  currentFilters: any = {};
+  handleApplyFilters(filters: any) {
+    this.currentFilters = filters;
+  }
 }

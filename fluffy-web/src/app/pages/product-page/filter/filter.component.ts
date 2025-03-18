@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filter',
@@ -9,17 +9,28 @@ import { Component } from '@angular/core';
   styleUrl: './filter.component.css'
 })
 export class FilterComponent {
-  expandedSections = {
-    category: false,
-    color: false,
-    size: false,
-    price: false
+  @Output() applyFilters = new EventEmitter<any>();
+
+  filters = {
+    categories: [],
+    priceRange: { min: 0, max: Infinity },
+    colors: [],
+    sizes: []
   };
 
-  toggleSection(section: string) {
-    if (section in this.expandedSections) {
-      this.expandedSections[section as keyof typeof this.expandedSections] = 
-        !this.expandedSections[section as keyof typeof this.expandedSections];
-    }
+  expandedSections = {
+    category: false,
+    price: false,
+    color: false,
+    size: false
+  };
+
+  toggleSection(section: keyof typeof this.expandedSections) {
+    this.expandedSections[section] = !this.expandedSections[section];
+  }
+
+  // Gọi hàm này khi nhấn nút "ÁP DỤNG"
+  onApplyFilters() {
+    this.applyFilters.emit(this.filters);
   }
 }

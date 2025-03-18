@@ -1,9 +1,9 @@
 <div class="container">
     <div class="sidebar">
-        <app-filter></app-filter>
+        <app-filter (applyFilters)="handleApplyFilters($event)"></app-filter>
     </div>
     <div class="main-content">
-        <app-sort></app-sort>
-        <app-product-list></app-product-list>      
+        <app-sort (sortChange)="onSortChange($event)"></app-sort> <!-- Gửi sự kiện sang component cha -->
+        <app-product-list [sortOrder]="currentSortOrder"></app-product-list> <!-- Truyền sortOrder xuống ProductListComponent -->
     </div>
 </div>
