@@ -1,36 +1,92 @@
-import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { NgClass, CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, FormsModule, CommonModule],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css'
 })
-export class FilterComponent {
-  @Output() applyFilters = new EventEmitter<any>();
-
-  filters = {
-    categories: [],
-    priceRange: { min: 0, max: Infinity },
-    colors: [],
-    sizes: []
-  };
+export class FilterComponent implements OnInit {
+  @Input() products: Product[] = [];
+  @Output() filterChange = new EventEmitter<any>();
 
   expandedSections = {
     category: false,
-    price: false,
     color: false,
-    size: false
+    price: false
   };
+
+  selectedCollections: string[] = [];
+  selectedColors: string[] = [];
+  priceRange = {
+    min: '',
+    max: ''
+  };
+
+  collections: string[] = [];
+  colors: string[] = [];
+
+  ngOnInit() {
+    if (this.products && this.products.length > 0) {
+      this.extractFilterOptions();
+    }
+  }
+
+  ngOnChanges() {
+    if (this.products && this.products.length > 0) {
+      this.extractFilterOptions();
+    }
+  }
+
+  private extractFilterOptions() {
+    // Extract unique collections
+    this.collections = [...new Set(this.products.map(p => p.collection))];
+    
+    // Extract unique colors
+    this.colors = [...new Set(this.products.flatMap(p => p.color.selected_colors))];
+  }
 
   toggleSection(section: keyof typeof this.expandedSections) {
     this.expandedSections[section] = !this.expandedSections[section];
   }
 
-  // Gọi hàm này khi nhấn nút "ÁP DỤNG"
-  onApplyFilters() {
-    this.applyFilters.emit(this.filters);
+  onCollectionChange(event: any, collection: string) {
+    if (event.target.checked) {
+      this.selectedCollections.push(collection);
+    } else {
+      const index = this.selectedCollections.indexOf(collection);
+      if (index !== -1) {
+        this.selectedCollections.splice(index, 1);
+      }
+    }
+  }
+
+  onColorChange(event: any, color: string) {
+    if (event.target.checked) {
+      this.selectedColors.push(color);
+    } else {
+      const index = this.selectedColors.indexOf(color);
+      if (index !== -1) {
+        this.selectedColors.splice(index, 1);
+      }
+    }
+  }
+
+  applyFilters() {
+    const filters = {
+      collections: this.selectedCollections,
+      colors: this.selectedColors,
+      priceRange: {
+        min: this.priceRange.min ? parseFloat(this.priceRange.min) : null,
+        max: this.priceRange.max ? parseFloat(this.priceRange.max) : null
+      }
+    };
+    
+    this.filterChange.emit(filters);
   }
 }
+
