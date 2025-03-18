@@ -5,11 +5,13 @@
         </svg>
         <span class="title-text">Sắp xếp</span>
     </span>
-    <select class="sort-select" (change)="onSortChange($event)">
-        <option value="" disabled selected>Sắp xếp theo</option>
-        <option value="price-asc">Giá tăng dần</option>
-        <option value="price-desc">Giá giảm dần</option>
-        <option value="discount-desc">Khuyến mãi giảm dần</option>
-        <option value="discount-asc">Khuyến mãi tăng dần</option>
-    </select>
+  <select (change)="onSortChange($event)" class="sort-select">
+    <option value="">Mặc định</option>
+    <option value="price-asc">Giá: Thấp đến cao</option>
+    <option value="price-desc">Giá: Cao đến thấp</option>
+    <option value="rating-asc">Đánh giá: Thấp đến cao</option>
+    <option value="rating-desc">Đánh giá: Cao đến thấp</option>
+    <option value="name-asc">Tên: A-Z</option>
+    <option value="name-desc">Tên: Z-A</option>
+  </select>
 </div>
