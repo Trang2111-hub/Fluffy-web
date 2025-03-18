@@ -11,37 +11,33 @@
   
   <div class="filter-section">
     <div class="section-header" (click)="toggleSection('category')">
-      <span class="plus-icon">+</span>
+      <span class="plus-icon">{{ expandedSections.category ? '−' : '+' }}</span>
       <span>Danh mục sản phẩm</span>
     </div>
-    <div class="section-content" [ngClass]="{'expanded': expandedSections.category}">
-      <div class="category-option">
-        <input type="checkbox" id="gau-bong">
-        <label for="gau-bong"> Gấu bông</label>
+    <div class="section-content" [class.expanded]="expandedSections.category">
+      <div *ngFor="let collection of collections" class="filter-option">
+        <label>
+          <input type="checkbox" 
+                 [checked]="selectedCollections.includes(collection)"
+                 (change)="onCollectionChange($event, collection)">
+          {{ collection }}
+        </label>
       </div>
-      <div class="category-option">
-        <input type="checkbox" id="thu-bong">
-        <label for="thu-bong"> Thú bông</label>
-      </div>
-      <div class="category-option">
-        <input type="checkbox" id="gau-bong-hh">
-        <label for="gau-bong-hh"> Gấu bông hoạt hình</label>
-      </div>
-    </div>
+    </div>    
   </div>
   
   <div class="filter-divider"></div>
   
   <div class="filter-section">
-    <div class="section-header non-collapsible" (click)="toggleSection('price')">
-      <span class="plus-icon">+</span>
+    <div class="section-header" (click)="toggleSection('price')">
+      <span class="plus-icon">{{ expandedSections.price ? '−' : '+' }}</span>
       <span>Khoảng giá</span>
     </div>
-    <div class="section-content" [ngClass]="{'expanded': expandedSections.price}">
+    <div class="section-content" [class.expanded]="expandedSections.price">
       <div class="price-range">
-        <input type="text" class="price-input" placeholder="$ Từ">
-        <span class="price-separator">—</span>
-        <input type="text" class="price-input" placeholder="$ Đến">
+        <input type="number" class="price-input" placeholder="Từ" [(ngModel)]="priceRange.min">
+        <span class="price-separator">−</span>
+        <input type="number" class="price-input" placeholder="Đến" [(ngModel)]="priceRange.max">
       </div>
     </div>
   </div>
@@ -50,49 +46,20 @@
   
   <div class="filter-section">
     <div class="section-header" (click)="toggleSection('color')">
-      <span class="plus-icon">+</span>
+      <span class="plus-icon">{{ expandedSections.color ? '−' : '+' }}</span>
       <span>Màu sắc</span>
     </div>
-    <div class="section-content" [ngClass]="{'expanded': expandedSections.color}">
-      <div class="section-content expanded">
-        <div class="color-option">
-          <input type="checkbox" id="color-pink">
-          <label for="color-pink">Hồng</label>
-        </div>
-        <div class="color-option">
-          <input type="checkbox" id="color-red">
-          <label for="color-red">Đỏ</label>
-        </div>
+    <div class="section-content" [class.expanded]="expandedSections.color">
+      <div *ngFor="let color of colors" class="filter-option">
+        <label>
+          <input type="checkbox" 
+                 [checked]="selectedColors.includes(color)"
+                 (change)="onColorChange($event, color)">
+          {{ color }}
+        </label>
       </div>
     </div>
   </div>
-  
-  <div class="filter-divider"></div>
-  
-  <div class="filter-section">
-    <div class="section-header" (click)="toggleSection('size')">
-      <span class="plus-icon">+</span>
-      <span>Kích thước</span>
-    </div>
-    <div class="section-content" [ngClass]="{'expanded': expandedSections.size}">
-      <div class="size-option">
-        <input type="checkbox" id="size-s">
-        <label for="size-s">Size S (< 40cm)</label>
-      </div>
-      <div class="size-option">
-        <input type="checkbox" id="size-m">
-        <label for="size-m">Size M (40-80cm)</label>
-      </div>
-      <div class="size-option">
-      <div class="size-option">
-        <input type="checkbox" id="size-m">
-        <label for="size-m">Size L (>80cm)</label>
-      </div>
-      <div class="size-option">
-    </div>
-  </div>
-  
-  <div class="filter-divider"></div>
 </div>
 
-<button class="apply-button">ÁP DỤNG</button>
+<button class="apply-button" (click)="applyFilters()">ÁP DỤNG</button>

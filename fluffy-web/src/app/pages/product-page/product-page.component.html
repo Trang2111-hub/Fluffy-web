@@ -1,9 +1,9 @@
 <div class="container">
     <div class="sidebar">
-        <app-filter></app-filter>
+        <app-filter [products]="products" (filterChange)="handleFilter($event)"></app-filter>
     </div>
     <div class="main-content">
-        <app-sort></app-sort>
-        <app-product-list></app-product-list>      
+        <app-sort (sortChange)="handleSort($event)"></app-sort>
+        <app-product-list [products]="sortedProducts"></app-product-list>     
     </div>
 </div>

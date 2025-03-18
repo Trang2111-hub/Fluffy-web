@@ -76,3 +76,13 @@
 .page-number:hover:not(.active) {
     background: #f5f5f5;
 }
+
+.product-list-container {
+    width: 100%;
+    padding: 20px;
+}
+
+app-sort {
+    display: block;
+    margin-bottom: 20px;
+}
