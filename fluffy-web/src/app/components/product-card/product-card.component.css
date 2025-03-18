@@ -108,7 +108,7 @@
 }
 
 .add-to-cart:hover {
-    background-color: #e45a77;
+    background-color: #d04666;
     color: white;
 }
 
@@ -125,7 +125,7 @@
 }
 
 .buy-now-btn:hover {
-    background-color: #ff1493;
+    background-color: #d04666;
 }
 
 .favorite-btn {
