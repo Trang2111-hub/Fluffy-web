@@ -6,7 +6,7 @@ body {
 }
 
 body.scrolled {
-    padding-top: 40px; /* Chiều cao của nav */
+    padding-top: 40px;
 }
 
 .header {
