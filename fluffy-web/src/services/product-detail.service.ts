@@ -34,10 +34,6 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  // Lấy tất cả sản phẩm
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products/all`);
-  }
 
   // Lấy chi tiết sản phẩm theo product_id
   getProductById(productId: number): Observable<Product> {

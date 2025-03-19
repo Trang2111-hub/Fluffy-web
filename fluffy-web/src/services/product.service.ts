@@ -13,7 +13,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products`).pipe(
+    return this.http.get<Product[]>(`${this.apiUrl}/products/all`).pipe(
       tap(products => console.log('ProductService - Products fetched:', products)),
       catchError(this.handleError)
     );
