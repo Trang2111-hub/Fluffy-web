@@ -16,19 +16,26 @@ import { Product } from './models/product.model';
 export class ProductPageComponent implements OnInit {
   products: Product[] = [];
   sortedProducts: Product[] = [];
+  loading: boolean = true;
+  error: string | null = null;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(
-      (data) => {
+    this.loading = true;
+    this.productService.getProducts().subscribe({
+      next: (data) => {
+        console.log('Products received:', data);
         this.products = data;
         this.sortedProducts = [...data];
+        this.loading = false;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching products:', error);
+        this.error = 'Không thể tải danh sách sản phẩm. Vui lòng thử lại sau.';
+        this.loading = false;
       }
-    );
+    });
   }
 
   handleFilter(filters: any) {
@@ -71,7 +78,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   handleSort(sortOption: string) {
-    this.sortedProducts = [...this.sortedProducts]; // Tạo bản sao mới để sắp xếp
+    this.sortedProducts = [...this.sortedProducts];
     
     if (sortOption === 'price-asc') {
       this.sortedProducts.sort((a, b) => 

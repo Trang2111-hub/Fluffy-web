@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService, Product } from '../../../services/product-detail.service';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, ProductCardComponent],
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
@@ -20,22 +21,42 @@ export class ProductDetailComponent implements OnInit {
   relatedProducts: Product[] = [];
   loading: boolean = true;
   error: string | null = null;
+  displayCount: number = 4;
+  isFavorite: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService
-  ) {}
+  ) {
+    this.updateDisplayCount();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.updateDisplayCount();
+  }
+
+  private updateDisplayCount() {
+    this.displayCount = window.innerWidth <= 1280 ? 3 : 4;
+  }
 
   ngOnInit() {
     // Lấy product ID từ URL và chuyển thành số
-    this.route.params.subscribe(params => {
-      const id = parseInt(params['id']);
-      if (!isNaN(id)) {
-        this.productId = id;
-        this.loadProductDetails();
-      } else {
-        this.error = 'ID sản phẩm không hợp lệ';
+    this.route.params.subscribe({
+      next: (params) => {
+        const id = parseInt(params['id']);
+        if (!isNaN(id)) {
+          this.productId = id;
+          this.loadProductDetails();
+        } else {
+          this.error = 'ID sản phẩm không hợp lệ';
+          this.loading = false;
+        }
+      },
+      error: (error) => {
+        console.error('Lỗi khi lấy params:', error);
+        this.error = 'Có lỗi xảy ra';
         this.loading = false;
       }
     });
@@ -126,5 +147,9 @@ export class ProductDetailComponent implements OnInit {
 
   navigateToRelatedProduct(productId: number) {
     this.router.navigate(['/product', productId]);
+  }
+
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
   }
 }

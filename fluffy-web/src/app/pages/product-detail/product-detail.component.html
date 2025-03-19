@@ -43,10 +43,16 @@
             <i class="fas fa-star"></i> 
             | 15 đánh giá
           </div>
-          <h1 class="product-title">{{ product.product_name }}</h1>
+          <div class="product-title-container">
+            <h1 class="product-title">{{ product.product_name }}</h1>
+            <button class="favorite-button" [class.active]="isFavorite" (click)="toggleFavorite()">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+          <hr>
           <p class="product-price">
-            {{ product.pricing?.original_price }}
-            <span class="old-price" *ngIf="product.pricing?.discount_percentage">
+            {{ product.pricing.original_price }}
+            <span class="old-price" *ngIf="product.pricing.discount_percentage">
               {{ calculateOriginalPrice(product.pricing.original_price, product.pricing.discount_percentage) }}
             </span>
           </p>
@@ -92,6 +98,7 @@
           <button class="add-to-cart" (click)="addToCart()">Thêm vào giỏ hàng</button>
           <button class="buy-now" (click)="buyNow()">Mua ngay</button>
         </div>
+        <hr>
         <div class="product-benefits">
           <ul class="product-benefits-list">
             <li><img src="../../assets/icons/tick_done.png" alt=""> 100% bông trắng tinh khiết</li>
@@ -368,60 +375,24 @@
       </section>
 
       <!-- Sản phẩm liên quan -->
-      <section class="related-products" *ngIf="relatedProducts && relatedProducts.length > 0">
+      <section class="related-products" *ngIf="relatedProducts.length > 0">
         <div class="section-header">
           <h2 class="section-title">Sản phẩm liên quan</h2>
-          <button class="view-more-button" [routerLink]="['/product-page']">Xem thêm</button>
+          <button class="view-more-button" [routerLink]="['/products']">Xem thêm</button>
         </div>
-  
         <div class="products-slider">
           <button class="slider-nav prev-button">
-            <img
-              src="../../assets/icons/chevrons_left.png"
-              alt="Previous"
-            />
+            <img src="assets/icons/chevrons_left.png" alt="Previous">
           </button>
-  
-          <div class="products-row">
-            <ng-container *ngFor="let relatedProduct of relatedProducts">
-              <article class="product-card">
-                <div class="product-card-content">
-                  <img
-                    [src]="relatedProduct.image || relatedProduct.images?.[0]"
-                    class="product-image"
-                    [alt]="relatedProduct.product_name"
-                  />
-  
-                  <div class="product-info">
-                    <div class="product-details">
-                      <h3 class="product-card-title">{{ relatedProduct.product_name }}</h3>
-                      <span class="current-price">{{ relatedProduct.pricing?.original_price }}</span>
-                    </div>
-  
-                    <div class="product-discount" *ngIf="relatedProduct.pricing?.discount_percentage">
-                      <img
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/d3331a16b102c15bf43daeed64738e1904acf1cfef4ca2e17385a2f1eaa9b7eb?placeholderIfAbsent=true&apiKey=6da7978554514d38a839fa220c863ec2"
-                        class="discount-icon"
-                        alt="Discount"
-                      />
-                      <span class="original-price">
-                        {{ calculateOriginalPrice(relatedProduct.pricing.original_price, relatedProduct.pricing.discount_percentage) }}
-                      </span>
-                    </div>
-                  </div>
-  
-                  <button class="add-to-cart-button" (click)="addToCart()">Thêm vào giỏ hàng</button>
-                  <button class="buy-now-button" (click)="buyNow()">MUA NGAY</button>
-                </div>
-              </article>
-            </ng-container>
+          <div class="related-products-grid">
+            <app-product-card 
+              *ngFor="let product of relatedProducts.slice(0, displayCount)" 
+              [product]="product"
+              (click)="navigateToRelatedProduct(product.product_id)">
+            </app-product-card>
           </div>
-  
           <button class="slider-nav next-button">
-            <img
-              src="../../assets/icons/chevrons_right.png"
-              alt="Next"
-            />
+            <img src="assets/icons/chevrons_right.png" alt="Next">
           </button>
         </div>
       </section>

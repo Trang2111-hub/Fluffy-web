@@ -546,16 +546,15 @@
 
 /*RELATED PRODUCTS*/
 .related-products {
-  margin-top: 50px;
+  margin-top: 48px;
   width: 100%;
 }
 
 .section-header {
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 37px;
+  margin-bottom: 32px;
 }
 
 .section-title {
@@ -682,6 +681,14 @@
 .original-price {
   align-self: start;
   margin-top: 6px;
+}
+
+.related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 0;
+  width: 100%;
 }
 
 /* Media Queries */
@@ -836,11 +843,11 @@
 
   /* Điều chỉnh phần sản phẩm liên quan */
   .related-products {
-    margin-top: 30px;
+    margin-top: 32px;
   }
 
   .section-header {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
 
   .section-title {
@@ -894,4 +901,50 @@
   .original-price {
     font-size: 0.9rem;
   }
+
+  .related-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  .related-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .slider-nav {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.product-title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-button i {
+  font-size: 24px;
+  color: var(--primary-color);
+  -webkit-text-stroke: 2px var(--primary-color);
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.favorite-button:hover i,
+.favorite-button.active i {
+  -webkit-text-fill-color: var(--primary-color);
 }
