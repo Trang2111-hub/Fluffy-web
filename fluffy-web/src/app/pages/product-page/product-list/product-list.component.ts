@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductCardComponent } from '../../../components/product-card/product-card.component';
-import { ProductService } from '../../../services/product.service';
+import { ProductService } from '../../../../services/product.service';
 import { Product } from '../models/product.model';
 import { SortComponent, SortOption } from '../sort/sort.component';
 

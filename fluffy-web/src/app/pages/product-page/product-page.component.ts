@@ -3,7 +3,7 @@ import { FilterComponent } from './filter/filter.component';
 import { SortComponent } from './sort/sort.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { Product } from './models/product.model';
 
 @Component({

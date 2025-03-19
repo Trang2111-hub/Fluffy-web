@@ -1,57 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-
-export interface Product {
-  _id: string;
-  product_id: number;
-  product_name: string;
-  pricing: {
-    original_price: string;
-    discount_percentage: string;
-  };
-  images: string[];
-  image: string;
-  color: {
-    selected_colors: string[];
-  };
-  size: {
-    available_sizes: string[];
-  };
-  rating: number;
-  description: string;
-  collection: string;
-}
-
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { Product } from '../app/pages/product-page/models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000'; // URL của server của bạn
 
   constructor(private http: HttpClient) { }
 
-  // Lấy tất cả sản phẩm
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products/all`);
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/products`).pipe(
+      tap(products => console.log('ProductService - Products fetched:', products)),
+      catchError(this.handleError)
+    );
   }
 
-  // Lấy chi tiết sản phẩm theo product_id
-  getProductById(productId: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/products/${productId}`);
-  }
-
-  // Lấy sản phẩm theo bộ sưu tập
-  getProductsByCollection(collection: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products/collection/${collection}`);
-  }
-
-  // Lấy sản phẩm liên quan (dựa trên collection)
-  getRelatedProducts(productId: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products/related/${productId}`);
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An error occurred';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 } 
-
