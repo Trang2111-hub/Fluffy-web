@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService, Product } from '../../../services/product-detail.service';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -27,7 +28,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService
   ) {
     this.updateDisplayCount();
   }
@@ -122,15 +124,16 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
-    if (!this.product) return;
-    
-    // // TODO: Thêm vào giỏ hàng
-    // console.log('Adding to cart:', {
-    //   product: this.product,
-    //   quantity: this.quantity,
-    //   color: this.selectedColor,
-    //   size: this.selectedSize
-    // });
+    if (this.product) {
+      this.cartService.addToCart({
+        id: this.product.product_id.toString(),
+        name: this.product.product_name,
+        price: parseFloat(this.product.pricing?.original_price.toString().replace(/[,.]/g, '')) || 0,
+        imageUrl: this.product.images[0],
+        quantity: this.quantity
+      });
+      this.cartService.openCart();
+    }
   }
 
   buyNow() {
