@@ -16,8 +16,8 @@
 .product-image-container {
     position: relative;
     width: 100%;
-    border: 3px solid #EB5265;
-    padding-top: 100%; /* 1:1 Aspect Ratio */
+    border: 3px solid var(--primary-color);
+    padding-top: 100%;
     overflow: hidden;
 }
 
@@ -37,10 +37,8 @@
 .product-name {
     font-size: 1rem;
     font-weight: bold;
-    color: #EB5265;
-    /* margin: 0 0 5px 0; */
+    color: var(--primary-color);
     display: -webkit-box;
-    /* -webkit-line-clamp: 2; */
     -webkit-box-orient: vertical;
     overflow: hidden;
     height: 40px;
@@ -62,7 +60,7 @@
 .discounted-price {
     font-size: 16px;
     font-weight: 600;
-    color: #e45a77;
+    color: var(--primary-color);
 }
 
 .rating {
@@ -94,9 +92,9 @@
     gap: 8px;
     padding: 8px 16px;
     background-color: white;
-    border: 1px solid #e45a77;
-    border-radius: 4px;
-    color: #e45a77;
+    border: 1px solid var(--primary-color);
+    border-radius: 25px;
+    color: var(--primary-color);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
@@ -108,14 +106,14 @@
 }
 
 .add-to-cart:hover {
-    background-color: #d04666;
+    background-color: var(--hover-button);
     color: white;
 }
 
 .buy-now-btn {
     width: 100%;
     padding: 8px;
-    background-color: #e45a77;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 25px;
@@ -125,7 +123,7 @@
 }
 
 .buy-now-btn:hover {
-    background-color: #d04666;
+    background-color: var(--hover-button);
 }
 
 .favorite-btn {
@@ -147,7 +145,7 @@
 
 .favorite-btn i {
     font-size: 16px;
-    color: #e45a77;
+    color: var(--primary-color);
 }
 
 .favorite-btn:hover {
@@ -155,5 +153,5 @@
 }
 
 .favorite-btn.active i {
-    color: #e45a77;
+    color: var(--primary-color);
 }

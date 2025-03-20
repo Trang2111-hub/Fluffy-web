@@ -18,6 +18,7 @@ export class ProductPageComponent implements OnInit {
   sortedProducts: Product[] = [];
   loading: boolean = true;
   error: string | null = null;
+  noProductsMessage: string = '';
 
   constructor(private productService: ProductService) {}
 
@@ -39,6 +40,8 @@ export class ProductPageComponent implements OnInit {
   }
 
   handleFilter(filters: any) {
+    this.noProductsMessage = '';
+    
     console.log('Applying filters:', filters);
     
     let filtered = [...this.products];
@@ -50,14 +53,14 @@ export class ProductPageComponent implements OnInit {
       );
     }
 
-    // Filter by color
+    // Lọc theo màu
     if (filters.colors && filters.colors.length > 0) {
       filtered = filtered.filter(product => 
         filters.colors.some((color: any) => product.color.selected_colors.includes(color))
       );
     }
 
-    // Filter by price range
+    // Lọc theo giá
     if (filters.priceRange) {
       if (filters.priceRange.min !== null) {
         filtered = filtered.filter(product => {
@@ -71,6 +74,11 @@ export class ProductPageComponent implements OnInit {
           return price <= filters.priceRange.max;
         });
       }
+    }
+
+    // Kiểm tra nếu không có sản phẩm nào thỏa mãn điều kiện lọc
+    if (filtered.length === 0) {
+      this.noProductsMessage = 'Không tìm thấy sản phẩm nào phù hợp với các điều kiện lọc';
     }
 
     console.log('Filtered results:', filtered);
@@ -94,6 +102,14 @@ export class ProductPageComponent implements OnInit {
       this.sortedProducts.sort((a, b) => a.rating - b.rating);
     } else if (sortOption === 'rating-desc') {
       this.sortedProducts.sort((a, b) => b.rating - a.rating);
+    } else if (sortOption === 'name-asc') {
+      this.sortedProducts.sort((a, b) => 
+        (a.product_name || '').localeCompare(b.product_name || '')
+      );
+    } else if (sortOption === 'name-desc') {
+      this.sortedProducts.sort((a, b) => 
+        (b.product_name || '').localeCompare(a.product_name || '')
+      );
     }
   }
 }

@@ -8,7 +8,7 @@ import { Product } from '../app/pages/product-page/models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000'; // URL của server của bạn
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
