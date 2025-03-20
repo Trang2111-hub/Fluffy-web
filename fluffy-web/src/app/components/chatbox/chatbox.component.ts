@@ -26,7 +26,6 @@ export class ChatboxComponent {
     if (this.messageText.trim()) {
       this.messages.push({ type: 'user', content: this.messageText });
       this.messageText = '';
-      // Ở đây có thể thêm logic để xử lý tin nhắn, gọi API, vv.
     }
   }
 

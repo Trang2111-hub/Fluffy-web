@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8080'; // URL của server của bạn
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 

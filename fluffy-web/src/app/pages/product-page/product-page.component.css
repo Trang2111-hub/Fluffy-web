@@ -8,11 +8,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .sidebar {
-  flex: 0 0 250px; /* Chiều rộng cố định 250px */
+  flex: 0 0 250px;
 }
 
 .main-content {
-  flex: 1; /* Chiếm phần còn lại của không gian */
+  flex: 1;
 }
 
 ::ng-deep .chatbox-container {

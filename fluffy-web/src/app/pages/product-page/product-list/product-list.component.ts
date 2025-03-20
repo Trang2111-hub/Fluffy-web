@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductCardComponent } from '../../../components/product-card/product-card.component';
-import { ProductService } from '../../../services/product.service';
+import { ProductService } from '../../../../services/product.service';
 import { Product } from '../models/product.model';
 import { SortComponent, SortOption } from '../sort/sort.component';
 
@@ -16,10 +16,11 @@ import { SortComponent, SortOption } from '../sort/sort.component';
 })
 export class ProductListComponent implements OnInit {
     @Input() products: Product[] = [];
-    paginatedProducts: Product[] = []; // Mảng chứa sản phẩm của trang hiện tại
-    originalProducts: Product[] = []; // Store original order
+    @Input() noProductsMessage: string = '';
+    paginatedProducts: Product[] = []; 
+    originalProducts: Product[] = [];
     
-    itemsPerPage = 16; // 4 hàng x 4 cột = 16 sản phẩm
+    itemsPerPage = 16;
     currentPage = 1;
     totalPages = 1;
 
@@ -45,30 +46,10 @@ export class ProductListComponent implements OnInit {
     ngOnChanges() {
         console.log('ProductList ngOnChanges - Products received from parent:', this.products);
         if (this.products.length > 0) {
-            this.originalProducts = [...this.products]; // Update original copy
+            this.originalProducts = [...this.products]; 
             this.totalPages = Math.ceil(this.products.length / this.itemsPerPage);
             this.updatePaginatedProducts();
         }
-    }
-  
-    // Hàm sắp xếp sản phẩm theo price
-    sortProducts(sortOrder: string): void {
-      const sortedProducts = [...this.products];
-      
-      if (sortOrder === 'price-asc') {
-        this.products = sortedProducts.sort((a, b) => 
-          parseFloat(a.pricing.original_price.replace(/[^0-9]/g, '')) - 
-          parseFloat(b.pricing.original_price.replace(/[^0-9]/g, ''))
-        );
-      } else if (sortOrder === 'price-desc') {
-        this.products = sortedProducts.sort((a, b) => 
-          parseFloat(b.pricing.original_price.replace(/[^0-9]/g, '')) - 
-          parseFloat(a.pricing.original_price.replace(/[^0-9]/g, ''))
-        );
-      }
-      
-      console.log('Sorted products:', this.products);
-      this.updatePaginatedProducts();
     }
   
     // Cập nhật phân trang
@@ -92,7 +73,8 @@ export class ProductListComponent implements OnInit {
     }
 
     onSortChange(sortOption: SortOption) {
-        this.products = [...this.originalProducts]; // Reset to original order before sorting
+        console.log('Sort option received:', sortOption);
+        this.products = [...this.originalProducts];
         
         switch (sortOption) {
             case 'price-asc':
@@ -111,9 +93,18 @@ export class ProductListComponent implements OnInit {
             case 'rating-desc':
                 this.products.sort((a, b) => b.rating - a.rating);
                 break;
+            case 'name-asc':
+                this.products.sort((a, b) => (a.product_name|| '').localeCompare(b.product_name || ''));
+                break;
+            case 'name-desc':
+                this.products.sort((a, b) => (b.product_name || '').localeCompare(a.product_name || ''));
+                break;
+            default:
+                console.log('Unknown sort option:', sortOption);
         }
         
-        this.currentPage = 1; // Reset to first page
+        console.log('Sorted products:', this.products); 
+        this.currentPage = 1; 
         this.updatePaginatedProducts();
     }
 }
