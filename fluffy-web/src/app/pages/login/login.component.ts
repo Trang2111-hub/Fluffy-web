@@ -14,16 +14,13 @@ export class LoginComponent {
   rememberMe: boolean = false;
   showPassword: boolean = false;
 
-  // Toggle hiển thị mật khẩu
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
-  // Xử lý đăng nhập
   onLogin(event: Event) {
-    event.preventDefault(); // Ngừng hành động mặc định của form
+    event.preventDefault(); 
 
-    // Kiểm tra đăng nhập giả lập
     if (this.email === 'admin@example.com' && this.password === '123456') {
       alert('Đăng nhập thành công!');
     } else {
