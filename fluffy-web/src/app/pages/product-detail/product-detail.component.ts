@@ -112,32 +112,25 @@ export class ProductDetailComponent implements OnInit {
     this.selectedSize = size;
   }
 
-  calculateOriginalPrice(discountedPrice: string, discountPercentage: string): string {
-    // Chuyển đổi giá từ chuỗi "xxx.xxx đ" thành số
-    const priceValue = parseFloat(discountedPrice.replace(/\./g, '').replace(' đ', ''));
-    const discountValue = parseFloat(discountPercentage.replace('%', ''));
+  calculateDiscountedPrice(originalPrice: string, discountPercentage: string): string {
+    const price = parseFloat(originalPrice.replace(/[,.]/g, ''));
+    const discount = parseFloat(discountPercentage);
+    if (isNaN(price) || isNaN(discount)) return originalPrice;
     
-    if (isNaN(priceValue) || isNaN(discountValue)) {
-      return discountedPrice;
-    }
-    
-    // Tính giá gốc
-    const originalPrice = priceValue / (1 - discountValue / 100);
-    
-    // Format giá gốc về dạng "xxx.xxx đ"
-    return new Intl.NumberFormat('vi-VN').format(originalPrice) + ' đ';
+    const discountedPrice = price * (1 - discount / 100);
+    return discountedPrice.toLocaleString('vi-VN') + 'đ';
   }
 
   addToCart() {
     if (!this.product) return;
     
-    // TODO: Thêm vào giỏ hàng
-    console.log('Adding to cart:', {
-      product: this.product,
-      quantity: this.quantity,
-      color: this.selectedColor,
-      size: this.selectedSize
-    });
+    // // TODO: Thêm vào giỏ hàng
+    // console.log('Adding to cart:', {
+    //   product: this.product,
+    //   quantity: this.quantity,
+    //   color: this.selectedColor,
+    //   size: this.selectedSize
+    // });
   }
 
   buyNow() {

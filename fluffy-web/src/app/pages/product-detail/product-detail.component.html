@@ -50,12 +50,14 @@
             </button>
           </div>
           <hr>
-          <p class="product-price">
-            {{ product.pricing.original_price }}
-            <span class="old-price" *ngIf="product.pricing.discount_percentage">
-              {{ calculateOriginalPrice(product.pricing.original_price, product.pricing.discount_percentage) }}
+          <div class="price-container">
+            <span class="discounted-price" *ngIf="product.pricing?.discount_percentage">
+              {{calculateDiscountedPrice(product.pricing.original_price, product.pricing.discount_percentage)}}
             </span>
-          </p>
+            <span class="original-price" [class.has-discount]="product.pricing?.discount_percentage">
+              {{product.pricing?.original_price}}
+            </span>
+          </div>
   
           <div class="product-options">
             <div class="color-option" *ngIf="product.color && product.color.selected_colors && product.color.selected_colors.length > 0">
