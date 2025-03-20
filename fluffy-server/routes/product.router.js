@@ -84,7 +84,7 @@ router.get('/related/:productId', async (req, res) => {
         const relatedProducts = await mongoose.connection.db.collection('products').find({
             product_id: { $ne: productId },
             collection: currentProduct.collection
-        }).limit(3).toArray();
+        }).limit(4).toArray();
         
         res.json(relatedProducts);
     } catch (error) {

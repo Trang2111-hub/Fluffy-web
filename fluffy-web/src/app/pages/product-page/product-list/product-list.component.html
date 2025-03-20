@@ -1,7 +1,7 @@
 <div class="product-list">
     <div class="product-grid">
         <div *ngFor="let product of paginatedProducts">
-            <app-product-card [product]="product"></app-product-card>
+            <app-product-card [product]="product" (click)="navigateToProduct(product.product_id)"></app-product-card>
         </div>
     </div>
 

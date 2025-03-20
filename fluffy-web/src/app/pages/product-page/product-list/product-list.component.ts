@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { ProductCardComponent } from '../../../components/product-card/product-card.component';
 import { ProductService } from '../../../../services/product.service';
 import { Product } from '../models/product.model';
@@ -23,7 +24,11 @@ export class ProductListComponent implements OnInit {
     currentPage = 1;
     totalPages = 1;
 
-    constructor(private http: HttpClient, private productService: ProductService) {}
+    constructor(
+        private http: HttpClient, 
+        private productService: ProductService,
+        private router: Router
+    ) {}
 
     ngOnInit() {
         console.log('ProductList ngOnInit - Initial products:', this.products);
@@ -115,5 +120,9 @@ export class ProductListComponent implements OnInit {
         
         this.currentPage = 1; // Reset to first page
         this.updatePaginatedProducts();
+    }
+
+    navigateToProduct(productId: number) {
+        this.router.navigate(['/product', productId]);
     }
 }

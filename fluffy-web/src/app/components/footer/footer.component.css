@@ -137,6 +137,7 @@ hr{
     column-gap: 30px;
     flex-wrap: nowrap;
     flex-shrink: 1;
+    flex-wrap: wrap;
   }
 
   .footer-rigth-column {
@@ -178,7 +179,7 @@ hr{
   /* Điều chỉnh contact icons */
   .contact-icon {
     width: 16px;
-    height: 16px;
+    height: auto;
     margin-right: 8px;
   }
 
