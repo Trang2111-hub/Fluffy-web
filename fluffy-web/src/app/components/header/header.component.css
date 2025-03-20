@@ -63,8 +63,9 @@ body.scrolled {
 .search-bar i {
     position: absolute; 
     top: 50%; 
+    right: 10px; 
     transform: translateY(-50%); 
-    color: var(--primary-color); 
+    color: var(--primary-color, #EB5265); 
 }
 
 .nav-icons {

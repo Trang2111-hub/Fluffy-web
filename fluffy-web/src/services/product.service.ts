@@ -19,16 +19,27 @@ export class ProductService {
     );
   }
 
+  getProductsByIds(productIds: number[]): Observable<Product[]> {
+    return this.http.post<Product[]>(`${this.apiUrl}/products/cart-products`, { productIds }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProductById(productId: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/products/${productId}`).pipe(
+      tap(product => console.log('ProductService - Product fetched:', product)),
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred';
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
-} 
+}
