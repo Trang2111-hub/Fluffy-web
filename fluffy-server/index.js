@@ -6,8 +6,9 @@ const app = express()
 const port = process.env.PORT || 3000
 const cors = require('cors')
 
-// Cấu hình CORS
+// Middleware
 app.use(cors())
+app.use(express.json())
 
 // Connect to MongoDB
 try {
@@ -19,23 +20,16 @@ try {
   console.error('MongoDB configuration error:', error)
 }
 
+// Import routes
+const productRouter = require('./routes/product.router')
+
+// Mount router với prefix /products
+app.use('/products', productRouter)
+
 // Routes
 app.get('/', (req, res) => {
   res.send('Fluffy Store API is running')
 })
-
-// API lấy tất cả sản phẩm
-app.get('/products', (req, res) => {
-  mongoose.connection.db.collection('products').find({}).toArray()
-    .then(products => {
-      console.log(`Tìm thấy ${products.length} sản phẩm`);
-      res.json(products);
-    })
-    .catch(err => {
-      console.error('Lỗi khi lấy sản phẩm:', err.message);
-      res.status(500).json({ error: err.message });
-    });
-});
 
 // Start server
 app.listen(port, () => {
