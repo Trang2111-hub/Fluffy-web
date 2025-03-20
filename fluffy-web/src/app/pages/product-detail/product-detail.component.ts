@@ -129,16 +129,28 @@ export class ProductDetailComponent implements OnInit {
         id: this.product.product_id.toString(),
         name: this.product.product_name,
         price: parseFloat(this.product.pricing?.original_price.toString().replace(/[,.]/g, '')) || 0,
-        imageUrl: this.product.images[0],
-        quantity: this.quantity
+        imageUrl: Array.isArray(this.product.images) ? this.product.images[0] : this.product.images,
+        quantity: this.quantity,
+        color: this.selectedColor || undefined,
+        size: this.selectedSize || undefined
       });
       this.cartService.openCart();
     }
   }
 
   buyNow() {
-    this.addToCart();
-    this.router.navigate(['/payment']);
+    if (this.product) {
+      this.cartService.addToCart({
+        id: this.product.product_id.toString(),
+        name: this.product.product_name,
+        price: parseFloat(this.product.pricing?.original_price.toString().replace(/[,.]/g, '')) || 0,
+        imageUrl: Array.isArray(this.product.images) ? this.product.images[0] : this.product.images,
+        quantity: this.quantity,
+        color: this.selectedColor || undefined,
+        size: this.selectedSize || undefined
+      });
+      this.router.navigate(['/payment']);
+    }
   }
 
   navigateToRelatedProduct(productId: number) {
