@@ -1,6 +1,6 @@
 <div class="chatbox-container" [class.minimized]="!isOpen">
     <div *ngIf="!isOpen" class="chat-button" (click)="toggleChat()">
-      <img src="../../../assets/icons/chatbox.png" alt="Chat Icon" class="chat-icon" />
+      <img src="../../../assets/images/chatbox/chatbox.png" alt="Chat Icon" class="chat-icon" />
     </div>
     
     <div *ngIf="isOpen" class="chatbox">
@@ -22,14 +22,14 @@
           <div class="advisor-options">
             <div class="advisor-option" [class.selected]="selectedAdvisor === 'ai'" (click)="selectAdvisor('ai')">
               <div class="advisor-icon-container">
-                <img src="../../../assets/icons/chatbox.png" class="advisor-icon" />
+                <img src="../../../assets/images/chatbox/chatbox.png" class="advisor-icon" />
               </div>
               <div class="advisor-label">Trợ lý AI</div>
             </div>
             
             <div class="advisor-option" [class.selected]="selectedAdvisor === 'human'" (click)="selectAdvisor('human')">
               <div class="advisor-icon-container">
-                <img src="../../../assets/icons/People.png" alt="Human Advisor" class="advisor-icon" />
+                <img src="../../../assets/images/chatbox/People.png" alt="Human Advisor" class="advisor-icon" />
               </div>
               <div class="advisor-label">Tư vấn viên</div>
             </div>
@@ -39,7 +39,7 @@
         <div class="chat-messages" *ngIf="selectedAdvisor">
           <div class="message ai-message">
             <div class="message-avatar">
-              <img src="../../../assets/icons/chatbox.png" alt="AI Avatar" />
+              <img src="../../../assets/images/chatbox/chatbox.png" alt="AI Avatar" />
             </div>
             <div class="message-content">
               <p>Xin chào! Mình là trợ lý AI của bạn tại Fluffy. Mình đang phát triển nên không phải lúc nào cũng đúng đâu.</p>

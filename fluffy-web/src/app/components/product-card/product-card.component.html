@@ -10,7 +10,7 @@
                 {{calculateDiscountedPrice(product.pricing.original_price, product.pricing.discount_percentage)}}đ
             </span>
             <span class="original-price" [class.has-discount]="product.pricing?.discount_percentage">
-                {{product.pricing?.original_price}}đ
+                {{product.pricing?.original_price}}
             </span>
         </div>
         <div class="rating" *ngIf="product.rating">
