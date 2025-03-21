@@ -1,40 +1,66 @@
-<div class="top-container">
-    <div class = "top-container">
-       <div class="slider-container">
-       <div class="slides">
-           <div class="slide active">
-               <img src="https://theme.hstatic.net/200000856317/1001220433/14/slide_1_mb.jpg?v=324" alt="Banner 1" >
-           </div>
+<div class="slider-container">
+  <div class="slides" [style.transform]="getTransformStyle()">
+    <div class="slide" *ngFor="let slide of slides">
+      <img [src]="slide" [alt]="'Banner'">
+    </div>
+  </div>
 
-           <div class="slide">
-               <img src="img/sale 55 Banner (1).png" alt="Banner 2" >
-           </div>
+  <!-- Nút điều hướng -->
+  <button class="prev" (click)="prevSlide()">&#10094;</button>
+  <button class="next" (click)="nextSlide()">&#10095;</button>
 
-           <div class="slide">
-               <img src="img/3.png" alt="Banner 3"  >
-           </div>
-       </div>
-
-       <div class="dots-container">
-         <span class="dot active" onclick="currentSlide(1)"></span>
-         <span class="dot" onclick="currentSlide(2)"></span>
-         <span class="dot" onclick="currentSlide(3)"></span>
-     </div>
-     </div>
-   </div>
-       
-       <!-- Nút điều hướng -->
+  <!-- Dots điều hướng -->
+  <div class="dots-container">
+    <span 
+      *ngFor="let slide of slides; let i = index"
+      class="dot"
+      [class.active]="i === currentIndex"
+      (click)="currentSlide(i)">
+    </span>
+  </div>
 </div>
+
    
  
 <div class="main-container">
+
+  <!-- SẢN PHẨM BÁN CHẠY -->
      <div class="best-seller">
        <h2>SẢN PHẨM BÁN CHẠY</h2>
    </div>
- 
+
+
+
+
+
+ <!-- SẢN PHẨM KHUYẾN MÃI -->
      <div class="sales">
-       <h2>SẢN PHẨM KHUYẾN MÃI</h2>
-     </div>
+       <div class = "header">
+          <h2>SẢN PHẨM KHUYẾN MÃI</h2>
+       </div>
+<section class="discounted-products" *ngIf="discountedProducts.length > 0">
+  <div class="section-header">
+    <h2 class="section-title">Sản phẩm khuyến mãi</h2>
+    <button class="view-more-button" [routerLink]="['/products']">Xem thêm</button>
+  </div>
+  <div class="products-slider">
+    <button class="slider-nav prev-button">
+      <img src="assets/icons/chevrons_left.png" alt="Previous">
+    </button>
+    <div class="discounted-products-grid">
+      <app-product-card 
+        *ngFor="let product of discountedProducts.slice(0, displayCount)" 
+        [product]="product"
+        (click)="navigateToDiscountedProduct(product.product_id)">
+      </app-product-card>
+    </div>
+    <button class="slider-nav next-button">
+      <img src="assets/icons/chevrons_right.png" alt="Next">
+    </button>
+  </div>
+</section>
+
+
  
      <div class="bst">
        <!-- BST Fashion -->
