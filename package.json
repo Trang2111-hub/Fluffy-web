@@ -1,0 +1,20 @@
+{
+  "name": "fluffy-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trang2111-hub/Fluffy-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trang2111-hub/Fluffy-web/issues"
+  },
+  "homepage": "https://github.com/Trang2111-hub/Fluffy-web#readme",
+  "description": ""
+}
