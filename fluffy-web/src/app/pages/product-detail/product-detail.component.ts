@@ -144,7 +144,7 @@ export class ProductDetailComponent implements OnInit {
 
   buyNow() {
     if (this.product) {
-      this.addToCart();
+      // this.addToCart();
       this.router.navigate(['/payment']);
     }
   }
