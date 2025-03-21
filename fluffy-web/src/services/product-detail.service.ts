@@ -56,8 +56,8 @@ export class ProductService {
   } 
 
 // Lấy sản phẩm khuyến mãi
-  getDiscountedProducts(categoryId: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products/discounted?categoryId=${categoryId}`);
+  getDiscountedProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/products/discounted`);
   }
 
 }
