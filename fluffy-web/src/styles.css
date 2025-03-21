@@ -15,7 +15,7 @@
     width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
-    font-family: 'Quicksand';
+    font-family: 'Quicksand' !important;
   }
   
   body {

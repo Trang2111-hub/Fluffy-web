@@ -1,3 +1,4 @@
+
 .product-card {
     position: relative;
     width: 100%;
@@ -38,6 +39,7 @@
     font-size: 1rem;
     font-weight: bold;
     color: var(--primary-color);
+    font-family: 'Quicksand';
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -47,11 +49,13 @@
 .price-container {
     display: flex;
     align-items: center;
+    font-family: 'Quicksand';
     gap: 8px;
     margin-bottom: 8px;
 }
 
 .original-price {
+    font-family: 'Quicksand';
     font-size: 14px;
     color: #999;
     text-decoration: line-through;
