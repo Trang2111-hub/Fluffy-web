@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProductService, Product } from '../../../services/product-detail.service';
+import { ProductService } from '../../../services/product.service';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { CartService } from '../../../services/cart.service';
 
@@ -15,11 +15,11 @@ import { CartService } from '../../../services/cart.service';
 })
 export class ProductDetailComponent implements OnInit {
   productId: number = 0;
-  product: Product | null = null;
+  product: any | null = null;
   quantity: number = 1;
   selectedColor: string | null = null;
   selectedSize: string | null = null;
-  relatedProducts: Product[] = [];
+  relatedProducts: any[] = [];
   loading: boolean = true;
   error: string | null = null;
   displayCount: number = 4;
@@ -44,7 +44,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Lấy product ID từ URL và chuyển thành số
     this.route.params.subscribe({
       next: (params) => {
         const id = parseInt(params['id']);
@@ -66,15 +65,12 @@ export class ProductDetailComponent implements OnInit {
 
   loadProductDetails() {
     this.loading = true;
-    
     this.productService.getProductById(this.productId).subscribe({
       next: (data) => {
         this.product = data;
         this.selectedColor = data.color?.selected_colors?.[0] || null;
         this.selectedSize = data.size?.available_sizes?.[0] || null;
         this.loading = false;
-        
-        // Sau khi lấy thông tin sản phẩm, lấy các sản phẩm liên quan
         this.loadRelatedProducts();
       },
       error: (err) => {
@@ -86,9 +82,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   loadRelatedProducts() {
-    this.productService.getRelatedProducts(this.productId).subscribe({
+    this.productService.getProducts().subscribe({
       next: (products) => {
-        this.relatedProducts = products;
+        this.relatedProducts = products.filter(p => p.product_id !== this.productId).slice(0, 4);
       },
       error: (err) => {
         console.error('Lỗi khi lấy sản phẩm liên quan:', err);
@@ -116,39 +112,39 @@ export class ProductDetailComponent implements OnInit {
 
   calculateDiscountedPrice(originalPrice: string, discountPercentage: string): string {
     const price = parseFloat(originalPrice.replace(/[,.]/g, ''));
-    const discount = parseFloat(discountPercentage);
+    const discount = parseFloat(discountPercentage) || 0;
     if (isNaN(price) || isNaN(discount)) return originalPrice;
-    
     const discountedPrice = price * (1 - discount / 100);
     return discountedPrice.toLocaleString('vi-VN') + 'đ';
   }
 
   addToCart() {
     if (this.product) {
-      this.cartService.addToCart({
-        id: this.product.product_id.toString(),
-        name: this.product.product_name,
-        price: parseFloat(this.product.pricing?.original_price.toString().replace(/[,.]/g, '')) || 0,
-        imageUrl: Array.isArray(this.product.images) ? this.product.images[0] : this.product.images,
-        quantity: this.quantity,
-        color: this.selectedColor || undefined,
-        size: this.selectedSize || undefined
-      });
+      const originalPrice = parseFloat(this.product.pricing?.original_price.replace(/[,.]/g, '')) || 0;
+      const discountPercentage = parseFloat(this.product.pricing?.discount_percentage) || 0;
+      const discountPrice = originalPrice * (1 - discountPercentage / 100);
+
+      const productToAdd = {
+        product_id: this.product.product_id,
+        product_name: this.product.product_name,
+        discount_price: discountPrice,
+        original_price: originalPrice,
+        image: this.product.images?.[0] || this.product.image,
+        color: this.product.color,
+        size: this.product.size,
+        rating: this.product.rating,
+        description: this.product.description,
+        collection: this.product.collection,
+        quantity: this.quantity
+      };
+      this.cartService.addToCart(productToAdd);
       this.cartService.openCart();
     }
   }
 
   buyNow() {
     if (this.product) {
-      this.cartService.addToCart({
-        id: this.product.product_id.toString(),
-        name: this.product.product_name,
-        price: parseFloat(this.product.pricing?.original_price.toString().replace(/[,.]/g, '')) || 0,
-        imageUrl: Array.isArray(this.product.images) ? this.product.images[0] : this.product.images,
-        quantity: this.quantity,
-        color: this.selectedColor || undefined,
-        size: this.selectedSize || undefined
-      });
+      this.addToCart();
       this.router.navigate(['/payment']);
     }
   }
