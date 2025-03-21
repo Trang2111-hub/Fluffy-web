@@ -39,6 +39,9 @@
         <span class="price-separator">−</span>
         <input type="number" class="price-input" placeholder="Đến" [(ngModel)]="priceRange.max">
       </div>
+      <div *ngIf="errorMessage" class="error-message" style="color: red; margin-top: 10px;">
+        {{ errorMessage }}
+      </div>
     </div>
   </div>
   

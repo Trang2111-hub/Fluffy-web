@@ -28,7 +28,7 @@
 .title {
     font-size: 22px;
     font-weight: bold;
-    color: #EB5265;
+    color: var(--primary-color);
     text-align: left;
     margin-bottom: 20px;
     margin-top: 0;
@@ -53,13 +53,13 @@
     margin-bottom: 20px;
 }
 .forgot-password {
-    color: #EB5265;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: bold ;
 }
-.login-btn {
+.signup-btn {
     width: 100%;
-    background-color: #EB5265;
+    background-color: var(--primary-color);
     color: white;
     font-weight: bold;
     padding: 12px;
@@ -67,6 +67,9 @@
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
+}
+.signup-btn:hover{
+    background-color: var(--hover-button);
 }
 .login{
     margin-top: 10px;
@@ -76,15 +79,15 @@
     margin-bottom: 20px;
 }
 .login-text {
-    color: #EB5265;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: bold ;
 }
 .hr {
-    border: 1px solid #EB5265;
+    border: 1px solid var(--primary-color);
     margin-bottom: 10px; 
 }
-.social-login p {
+.social-signup p {
     font-size: 18px;
     font-weight: bold; 
     margin-top: 5px; 
@@ -110,4 +113,50 @@
     color: red;
     font-size: 14px;
     margin-bottom: 10px;
+}
+
+
+@media (min-width: 1280px) {
+    .container {
+        flex-direction: row; 
+        justify-content: space-between;
+        padding: 50px;
+    }
+
+    .signup-section {
+        flex: 0 0 40%; 
+        justify-content: flex-start;
+        margin-bottom: 0;
+    }
+
+    .signup-box {
+        flex: 0 0 50%; 
+        margin-top: 0;
+        margin-right: 0;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .input-group input {
+        font-size: 16px; 
+    }
+
+    .signup-btn {
+        font-size: 20px; 
+        padding: 14px;
+    }
+
+    .login {
+        font-size: 16px; 
+    }
+
+    .social-login p {
+        font-size: 20px; 
+    }
+
+    .social-btn {
+        width: 170px; 
+    }
 }

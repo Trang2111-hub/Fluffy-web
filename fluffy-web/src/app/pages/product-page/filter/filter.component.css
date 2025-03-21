@@ -1,4 +1,4 @@
-/* product-filter.component.css */
+
 .filter-container {
   padding: 15px;
   background: white;
@@ -16,7 +16,7 @@
 }
 
 .title-text {
-  color: #e45a77;
+  color: var(--primary-color);
   font-size: 18px;
   font-weight: 500;
   margin-left: 5px;
@@ -105,7 +105,7 @@
 .apply-button {
   width: 100%;
   padding: 10px;
-  background: #e45a77;
+  background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 25px;
@@ -115,5 +115,5 @@
 }
 
 .apply-button:hover {
-  background: #d04666;
+  background: var(--hover-button);
 }

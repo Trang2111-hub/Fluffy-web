@@ -1,4 +1,5 @@
 <div class="container">
+
     <!-- Loading state -->
     <div *ngIf="loading" class="loading-container">
         <div class="spinner-border text-primary" role="status">
@@ -7,7 +8,9 @@
         <p>Đang tải danh sách sản phẩm...</p>
     </div>
 
+
     <!-- Error state -->
+
     <div *ngIf="error" class="error-container">
         <div class="alert alert-danger">
             <p>{{ error }}</p>
@@ -22,7 +25,10 @@
         </div>
         <div class="main-content">
             <app-sort (sortChange)="handleSort($event)"></app-sort>
-            <app-product-list [products]="sortedProducts"></app-product-list>     
+            <app-product-list 
+                [products]="sortedProducts"
+                [noProductsMessage]="noProductsMessage">
+            </app-product-list>     
         </div>
     </ng-container>
 </div>

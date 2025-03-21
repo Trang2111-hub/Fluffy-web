@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../../services/cart.service';
 import { CartComponent } from '../cart/cart.component';
 
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -17,23 +18,35 @@ export class HeaderComponent implements OnInit {
   cartItemCount: number = 0;
   isScrolled: boolean = false;
 
+
   constructor(
     private router: Router,
     private cartService: CartService
   ) {}
 
+
+  // ngOnInit() {
+  //   // Đăng ký lắng nghe số lượng sản phẩm trong giỏ hàng
+  //   this.cartService.getCartItemCount().subscribe(count => {
+  //     this.cartItemCount = count;
+  //   });
+  // }
+
+
   ngOnInit() {
-    // Đăng ký lắng nghe số lượng sản phẩm trong giỏ hàng
-    this.cartService.getCartItemCount().subscribe(count => {
+    this.cartService.getCartItemCount().subscribe((count: number) => {
       this.cartItemCount = count;
     });
   }
+
+
+
 
   // Theo dõi sự kiện cuộn trang
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50;
-    
+   
     // Thêm class vào body để có thể tạo style khác khi cuộn
     if (this.isScrolled) {
       document.body.classList.add('scrolled');
@@ -42,25 +55,31 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+
   navigateToHome() {
     this.router.navigate(['/']);
   }
+
 
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
 
+
   navigateToSignup() {
     this.router.navigate(['/signup']);
   }
+
 
   navigateToProduct(productId: string) {
     this.router.navigate(['/product', productId]);
   }
 
+
   navigateToAccountSettings() {
     this.router.navigate(['/account-settings']);
   }
+
 
   openCart(event: Event) {
     event.preventDefault();
@@ -68,9 +87,11 @@ export class HeaderComponent implements OnInit {
     this.cartService.toggleCart();
   }
 
+
   toggleUserMenu() {
     this.isUserMenuOpen = !this.isUserMenuOpen;
   }
+
 
   logout() {
     this.isLoggedIn = false;
