@@ -29,8 +29,8 @@
   height: 100%;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  background-color: #fff;
 }
 
 .slide-image.active {
