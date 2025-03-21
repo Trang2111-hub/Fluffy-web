@@ -3,7 +3,7 @@
 }
 
 .title-text {
-    color: #e45a77;
+    color: var(--primary-color);
     font-size: 18px;
     font-weight: 500;
     margin-left: 5px;
@@ -13,12 +13,22 @@
 .sort-select {
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--primary-color);
   font-size: 14px;
   width: 200px;
 }
 
 .sort-select:focus {
   outline: none;
-  border-color: #666;
+  border-color: var(--secondary-color);
+}
+
+option:hover{
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.sort-select option:checked {
+  background-color: var(--primary-color);
+  color: white;
 }
