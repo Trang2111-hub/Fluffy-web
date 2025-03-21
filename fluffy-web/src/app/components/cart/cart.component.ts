@@ -1,83 +1,94 @@
 import { Component, OnInit, HostListener, HostBinding } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { FormsModule } from '@angular/forms';  // Thêm FormsModule
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../services/cart.service';
+import { ProductService } from '../../../services/product.service';
+import { BehaviorSubject } from 'rxjs';
+import { Product } from '../../../app/pages/product-page/models/product.model';
 
-interface Product {
-  title: string;
-  price: number;
-  discountPercentage: number;
-  images: string[];
-  category: string;
-  stock: boolean;
+interface CartProduct extends Product {
   quantity: number;
   totalPrice: number;
   selected: boolean;
+  discount_price: number;
 }
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  imports: [CommonModule, FormsModule],  // Đảm bảo đã import CommonModule và FormsModule
-  standalone: true  // Đánh dấu component này là standalone
+  imports: [CommonModule, FormsModule],
+  standalone: true,
 })
 export class CartComponent implements OnInit {
-  products: Product[] = []; // Khai báo mảng sản phẩm
+  products: CartProduct[] = [];
   totalAmount = 0;
   selectAll = false;
   isOpen = false;
-  
+
+  private isCartOpenSubject = new BehaviorSubject<boolean>(false);
+  isCartOpen$ = this.isCartOpenSubject.asObservable();
+
   @HostBinding('class.open')
   get isOpenClass() {
     return this.isOpen;
   }
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private productService: ProductService) {}
 
   ngOnInit() {
-    this.fetchProducts();
-    
-    // Theo dõi trạng thái hiển thị của popup
     this.cartService.isCartOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
-      
-      // Khi mở giỏ hàng, ngăn scroll trên body
       if (isOpen) {
         document.body.style.overflow = 'hidden';
+        this.loadCart();
       } else {
         document.body.style.overflow = 'auto';
       }
     });
   }
 
-  fetchProducts() {
-    fetch('https://dummyjson.com/products')
-      .then(response => response.json())
-      .then(data => {
-        this.products = data.products.slice(0, 4).map((product: any) => ({
-          ...product,
-          quantity: 1,
-          totalPrice: product.price,  // Khởi tạo totalPrice
-          selected: false,  // Khởi tạo selected
-        }));
-      })
-      .catch(error => {
-        console.error('Lỗi khi lấy dữ liệu từ API:', error);
+  loadCart() {
+    const cart = this.cartService.getCart();
+    const productIds = cart.map((p: CartProduct) => p.product_id);
+    if (productIds.length > 0) {
+      this.productService.getProductsByIds(productIds).subscribe({
+        next: (products) => {
+          this.products = products.map((product: Product) => {
+            const cartItem = cart.find((p: CartProduct) => p.product_id === product.product_id);
+            const originalPrice = parseFloat(product.pricing.original_price.replace(/[,.]/g, ''));
+            const discountPercentage = parseFloat(product.pricing.discount_percentage) || 0;
+            const discountPrice = originalPrice * (1 - discountPercentage / 100);
+
+            // Đảm bảo quantity được gán đúng từ cartItem
+            const quantity = cartItem?.quantity ?? 1; 
+
+            return {
+              ...product,
+              discount_price: discountPrice,
+              quantity: quantity,
+              totalPrice: discountPrice * quantity,
+              selected: cartItem?.selected || false
+            };
+          });
+          this.updateTotalAmount();
+        },
+        error: (err) => console.error('Error loading cart from backend:', err)
       });
+    } else {
+      this.products = [];
+      this.totalAmount = 0;
+    }
   }
 
-  // Đóng giỏ hàng
   closeCart() {
     this.cartService.closeCart();
   }
 
-  // Ngăn đóng popup khi click vào nội dung
   stopPropagation(event: Event) {
     event.stopPropagation();
   }
 
-  // Đóng popup khi nhấn ESC
   @HostListener('document:keydown.escape')
   onEscapePress() {
     if (this.isOpen) {
@@ -86,18 +97,22 @@ export class CartComponent implements OnInit {
   }
 
   updateTotalAmount() {
-    // Cập nhật totalAmount bằng cách tính tổng giá trị của các sản phẩm đã được chọn
     this.totalAmount = this.products.reduce((total, product) => {
       return total + (product.selected ? product.totalPrice : 0);
     }, 0);
   }
 
-  updateProductTotalPrice(product: Product) {
-    product.totalPrice = product.price * product.quantity;
+  updateProductTotalPrice(product: CartProduct) {
+    product.totalPrice = product.discount_price * product.quantity;
     this.updateTotalAmount();
+    const cart = this.cartService.getCart();
+    const updatedCart = cart.map((item: CartProduct) =>
+      item.product_id === product.product_id ? { ...item, quantity: product.quantity } : item
+    );
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   }
 
-  changeQuantity(product: Product, increment: boolean) {
+  changeQuantity(product: CartProduct, increment: boolean) {
     if (increment) {
       product.quantity++;
     } else if (product.quantity > 1) {
@@ -106,28 +121,30 @@ export class CartComponent implements OnInit {
     this.updateProductTotalPrice(product);
   }
 
-  toggleSelectProduct(product: Product) {
-    product.selected = !product.selected;  // Đảo trạng thái chọn của sản phẩm
-    this.updateTotalAmount();  // Cập nhật lại tổng khi chọn hoặc bỏ chọn
+  toggleSelectProduct(product: CartProduct) {
+    product.selected = !product.selected;
+    this.updateTotalAmount();
   }
 
   toggleSelectAll() {
-    // Khi click vào "Chọn tất cả", cập nhật trạng thái của selectAll và các sản phẩm
     this.selectAll = !this.selectAll;
-    this.products.forEach(product => product.selected = this.selectAll);
-    this.updateTotalAmount();  // Cập nhật lại tổng khi chọn tất cả
+    this.products.forEach(product => (product.selected = this.selectAll));
+    this.updateTotalAmount();
   }
 
   deleteAll() {
+    this.cartService.clearCart();
     this.products = [];
     this.totalAmount = 0;
   }
 
-  deleteProduct(product: Product) {
-    const index = this.products.indexOf(product);
-    if (index > -1) {
-      this.products.splice(index, 1);
-      this.updateTotalAmount();
-    }
+  deleteProduct(product: CartProduct) {
+    this.cartService.removeFromCart(product.product_id);
+    this.loadCart();
+  }
+
+  toggleCart(): void {
+    this.isCartOpenSubject.next(!this.isCartOpenSubject.value);
+    document.body.style.overflow = this.isCartOpenSubject.value ? 'hidden' : 'auto';
   }
 }

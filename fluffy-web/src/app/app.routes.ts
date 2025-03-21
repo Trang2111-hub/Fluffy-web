@@ -8,41 +8,42 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
 import { CartComponent } from './components/cart/cart.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 
+
 export const routes: Routes = [
-  { 
-    path: '', 
-    component: HomePageComponent 
+  {
+    path: '',
+    component: HomePageComponent
   },
-  { 
-    path: 'product/:id', 
-    component: ProductDetailComponent 
+  {
+    path: 'product/:id',
+    component: ProductDetailComponent
   },
-  { 
-    path: 'product-page', 
-    component: ProductPageComponent 
+  {
+    path: 'product-page',
+    component: ProductPageComponent
   },
-  { 
-    path: 'login', 
-    component: LoginComponent 
+  {
+    path: 'login',
+    component: LoginComponent
   },
-  { 
-    path: 'signup', 
-    component: SignupComponent 
+  {
+    path: 'signup',
+    component: SignupComponent
   },
-  { 
-    path: 'payment', 
-    component: PaymentComponent 
+  {
+    path: 'payment',
+    component: PaymentComponent
   },
-  { 
-    path: 'account-settings', 
-    component: AccountSettingsComponent 
+  {
+    path: 'account-settings',
+    component: AccountSettingsComponent
   },
-  { 
-    path: 'cart', 
-    component: CartComponent 
+  {
+    path: 'cart',
+    component: CartComponent
   },
-  { 
-    path: '**', 
-    redirectTo: '' 
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];

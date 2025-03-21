@@ -2,7 +2,7 @@
     <div class="product-image-container">
         <img [src]="product.image" [alt]="product.product_name" class="product-img">
     </div>
-    
+   
     <div class="product-info">
         <h3 class="product-name">{{product.product_name}}</h3>
         <div class="price-container">
@@ -18,15 +18,15 @@
             <span class="rating-value">{{product.rating}}</span>
         </div>
     </div>
-    
+   
     <div class="product-actions">
-        <button class="add-to-cart">
+        <button class="add-to-cart" (click)="addToCart($event)">
             <i class="fas fa-shopping-bag"></i>
             <span>Thêm vào giỏ hàng</span>
         </button>
         <button class="buy-now-btn">MUA NGAY</button>
     </div>
-    
+   
     <button class="favorite-btn" (click)="toggleFavorite()" [class.active]="isFavorite">
         <i class="fa-heart" [class.far]="!isFavorite" [class.fas]="isFavorite"></i>
     </button>
