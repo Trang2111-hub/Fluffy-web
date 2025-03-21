@@ -28,7 +28,7 @@
 }
 
 .checkout-form h2, .payment-method h2, .order-summary h2 {
-    color: var(--primary-color);
+    color: #EB5265;
     font-size: 24px;
     margin: 5px 0;
     display: flex;
@@ -66,13 +66,13 @@
     width: 16px;
     height: 16px;
     cursor: pointer;
-    accent-color: var(--primary-color);
+    accent-color: #EB5265;
 }
 .checkout-form input[type="radio"] {
     width: 16px;
     height: 16px;
     cursor: pointer;
-    accent-color: var(--primary-color);
+    accent-color: #EB5265;
 }
 .checkbox-container {
     display: flex;
@@ -94,8 +94,6 @@
 .product {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-
 }
 .product img {
     width: 90px;
@@ -104,31 +102,24 @@
 }
 .product-name {
     font-weight: bold;
-    color: var(--primary-color);
+    color: #EB5265;
     font-size: 16px;
     margin-left: 10px;
-    
 }
 .info {
     font-size: 12px;
     margin: 10px;
-    margin-bottom: 10px;
-
 }
 .price-info {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    margin-bottom: 10px;
-
 }
 .promo {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
     width: 100%; 
-    margin-bottom: 10px;
-
 }
 .promo img {
     width: 20px;  
@@ -142,33 +133,30 @@
 .promo-link {
     font-size: 16px;
     text-decoration: none;
-    margin-bottom: 10px;
-
 }
+
 .total-price {
     display: flex;
     justify-content: space-between;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px;
-
 }
+
 .order-btn {
     display: block;
     margin: 20px auto 0 auto;
-    background-color: var(--primary-color);
+    background-color: #EB5265;
     color: white;
     padding: 12px 20px;
     width: 50%;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
+font-size: 18px;
     font-weight: bold;
     text-align: center;
 }
 
 .order-btn:hover {
-    background-color: var(--hover-button);
+    background-color: #d81b60;
 }
-

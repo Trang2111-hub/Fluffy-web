@@ -141,7 +141,7 @@
         <div class="reviews-header">
           <div class="average-rating">
             <div class="rating-score-container">
-              <span class="rating-score">5.0</span>
+              <span class="rating-score">{{product?.rating || 0}}</span>
               <div class="rating-stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -380,7 +380,7 @@
       <section class="related-products" *ngIf="relatedProducts.length > 0">
         <div class="section-header">
           <h2 class="section-title">Sản phẩm liên quan</h2>
-          <button class="view-more-button" [routerLink]="['/products']">Xem thêm</button>
+          <button class="view-more-button" [routerLink]="['/product-page']">Xem thêm</button>
         </div>
         <div class="products-slider">
           <button class="slider-nav prev-button">
