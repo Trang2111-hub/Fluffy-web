@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 const Product = require('./models/Product.js');
 
+
 app.use(cors());
 app.use(express.json());
 
@@ -17,6 +18,7 @@ try {
 } catch (error) {
   console.error('MongoDB configuration error:', error);
 }
+
 
 const productRouter = require('./routes/product.router');
 app.use('/products', productRouter);
@@ -56,9 +58,49 @@ app.get('/products/:id', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Fluffy Store API is running');
-});
+    console.log('Root route accessed')
+    res.send('Fluffy Store API is running')
+})
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+// 404 handler
+app.use((req, res, next) => {
+    console.log(`404 - Route not found: ${req.method} ${req.url}`)
+    res.status(404).json({ message: 'Route not found' })
+})
+
+// Basic error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Server error:', err)
+    res.status(500).json({ 
+        message: 'Internal Server Error', 
+        error: err.message,
+        path: req.url
+    })
+})
+
+// Handle process termination
+process.on('SIGINT', () => {
+    mongoose.connection.close(() => {
+        console.log('MongoDB connection closed through app termination')
+        process.exit(0)
+    })
+})
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err)
+    mongoose.connection.close(() => {
+        console.log('MongoDB connection closed due to uncaught exception')
+        process.exit(1)
+    })
+})
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Promise Rejection:', reason)
+    mongoose.connection.close(() => {
+        console.log('MongoDB connection closed due to unhandled promise rejection')
+        process.exit(1)
+    })
+})
+
