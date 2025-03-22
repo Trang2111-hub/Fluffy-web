@@ -7,17 +7,37 @@
         <p>Warm hug, warm heart</p>
       </div>
     </div>
+
     <div class="search-bar">
       <input type="text" placeholder="Search">
       <i class="fas fa-search"></i>
     </div>
+
     <div class="nav-icons">
-      <a>
-        <div>
-          <i class="fas fa-truck"></i>
-          <span>Tra cứu <br> đơn hàng</span>
+      <!-- ✅ Bọc nút và popup vào container riêng -->
+      <div class="order-tracking-container">
+        <a (click)="toggleOrderTrackingPopup($event)">
+          <div>
+            <i class="fas fa-truck"></i>
+            <span>Tra cứu <br> đơn hàng</span>
+          </div>
+        </a>
+
+        <!-- ✅ Popup tra cứu đơn hàng hiển thị ngay dưới nút -->
+        <div class="order-tracking-popup" *ngIf="isOrderTrackingPopupOpen">
+          <div class="popup-content">
+            <div class="mb-4">
+              <input type="text" placeholder="Nhập mã đơn hàng" class="search-bar-input" />
+            </div>
+            <div class="mb-4">
+              <input type="text" placeholder="Nhập email hoặc số điện thoại" class="search-bar-input" />
+            </div>
+            <button class="track-button">Kiểm tra đơn hàng</button>
+          </div>
         </div>
-      </a>
+      </div>
+
+      <!-- Giỏ hàng -->
       <a class="cart-icon" (click)="openCart($event)">
         <div class="header-cart-icon">
           <i class="fas fa-shopping-cart"></i>
@@ -25,12 +45,16 @@
           <span>Giỏ <br> hàng</span>
         </div>
       </a>
+
+      <!-- Thông báo -->
       <a>
         <div>
           <i class="fas fa-bell"></i>
           <span>Thông <br> báo</span>
         </div>
       </a>
+
+      <!-- Tài khoản -->
       <a *ngIf="!isLoggedIn" [routerLink]="['/login']">
         <div>
           <i class="fas fa-user"></i>
@@ -46,6 +70,7 @@
     </div>
   </div>
 
+  <!-- Menu điều hướng -->
   <nav class="nav" [ngClass]="{'sticky-nav': isScrolled}">
     <div class="menu">
       <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
