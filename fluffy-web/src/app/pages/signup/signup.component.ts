@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   standalone: true, 
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  imports: [FormsModule, CommonModule] 
+  imports: [FormsModule, CommonModule,  RouterModule] 
 })
 export class SignupComponent {
   email: string = '';
@@ -15,6 +16,9 @@ export class SignupComponent {
   confirmPassword: string = '';
   agreeToTerms: boolean = false;
   errorMessage: string = '';
+  constructor(
+    private router: Router
+  ) {}
 
   onSignup() {
     console.log('Button clicked!'); 
