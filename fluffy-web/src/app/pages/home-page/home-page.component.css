@@ -227,7 +227,7 @@
   right: -25px;
 }
 
-/* Loading and error states */
+/* Loading and error */
 .loading-state, .error-state {
   text-align: center;
   padding: 20px;
@@ -322,16 +322,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   text-align: center;
-  min-height: 200px;
+  height: 100%;
+  padding-top: 5px;
 }
 
 .bst-title {
   font-size: 22px;
   font-weight: bold;
   color: #EB5265;
-  margin-bottom: 15px;
+  margin-bottom: 3px;
   font-family: 'Quicksand', sans-serif;
   text-align: center;
 }
@@ -339,23 +340,22 @@
 .bst-description {
   font-size: 14px;
   color: #333;
-  margin-bottom: 20px;
-  line-height: 1.5;
+  margin-bottom: 8px;
+  line-height: 1.3;
   text-align: center;
-  flex: 1;
 }
 
 .bst-button {
   background-color: #EB5265;
   color: white;
   border: none;
-  padding: 10px 30px;
+  padding: 6px 20px;
   border-radius: 25px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: auto;
+  margin-top: 3px;
 }
 
 .bst-button:hover {
@@ -365,37 +365,42 @@
 
 /* About section */
 .about-us {
-  margin: 40px 0;
+  margin: 0 0 20px 0;
 }
 
 .about-container {
   padding-left: 10px;
   margin: 0px auto;
   display: flex; 
-  max-width: 1420px;
   max-height: 310px;
   background-color: #F7D0E2;
   position: relative;
   left: 10px; 
+  padding: 10px;
+  max-width: 1380px;
+  text-align: center;
+  position: relative;
   font-family: 'Quicksand', sans-serif;
+  align-items: center;
+  justify-content: center;
 }
 
 .about-container img {
-  width: 700px;
+  width: 850px;
   height: 234px;
   object-fit: cover; 
   border: 2px solid #EB5265;
-  margin: 30px;
+  margin: 20px;
 }
 
 .about-text {
-  width: 700px;
+  width: 600px;
   font-size: 16px;
   color: #EB5265;
   text-align: justify;
   align-items: center;
-  padding: 40px;
-  margin: 20px auto;
+  padding: 20px;
+  margin: 0;
   line-height: 1.6;
 }
 
@@ -487,30 +492,70 @@
 
 /* Responsive styles */
 @media screen and (max-width: 1280px) {
-  .about-container {
-    width: calc(100% - 80px);
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px;
-    gap: 40px;
+  /* BST section */
+  .bst {
+    flex-direction: row;
+    gap: 20px;
+    width: calc(100% - 40px);
+    margin: 20px auto;
+    padding: 0;
   }
 
+  .bst-container {
+    flex-direction: column;
+    width: calc(50% - 10px);
+    padding: 10px;
+  }
+
+  .bst-image {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .bst-content {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  /* About section */
+  .about-container {
+    width: calc(100% - 40px); 
+    margin: 20px auto;
+    padding: 10px;
+    left: 0; 
+    max-width: none; 
+  }
+
+  /* Benefits section */
   .benefits-container {
-    width: calc(100% - 80px);
-    max-width: 1200px;
+    flex-wrap: wrap;
+    width: calc(100% - 40px);
+    right: 0;
     margin: 30px auto;
   }
 
-  .about-container img {
-    width: 600px;
-    height: 220px;
+  .benefit-item {
+    flex: 0 0 calc(50% - 20px);
+    padding: 15px;
   }
 
-  .about-text {
-    width: 400px;
-    font-size: 14px;
-    padding: 10px;
-    margin: 0 20px 0 auto;
+  /* Products section */
+  .products-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: calc(100% - 40px);
+  }
+
+  .products-row app-product-card {
+    max-width: 250px;
+  }
+
+  .nav-button:first-child {
+    left: -20px;
+  }
+  
+  .nav-button:last-child {
+    right: -20px;
   }
 }
 

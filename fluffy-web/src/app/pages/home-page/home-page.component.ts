@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../services/product-detail.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../services/product-detail.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -249,5 +249,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   showBanner(index: number): void {
     this.currentSlideIndex = index;
+  }
+
+  navigateToProducts() {
+    this.router.navigate(['/product-page']);
   }
 }
