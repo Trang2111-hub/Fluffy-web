@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-chatbox',
   imports: [CommonModule, FormsModule],
+  standalone: true,
   templateUrl: './chatbox.component.html',
   styleUrls: ['./chatbox.component.css']
 })
