@@ -51,8 +51,9 @@
       <p>{{ error }}</p>
     </div>
 
+    <!-- View more button -->
     <div class="view-more">
-      <button class="view-more-button" [routerLink]="['/products']">
+      <button class="view-more-button" (click)="navigateToProducts()">
         Xem thêm <i class="fas fa-arrow-right"></i>
       </button>
     </div>
@@ -89,7 +90,7 @@
     
     <!-- View more button -->
     <div class="view-more">
-      <button class="view-more-button" [routerLink]="['/products']">
+      <button class="view-more-button" (click)="navigateToProducts()">
         Xem thêm <i class="fas fa-arrow-right"></i>
       </button>
     </div>
@@ -108,7 +109,7 @@
         <div class="bst-description">
           Fluffy tự hào mang đến "BST FASHION IS IN THE AIR" - BST thời trang mới nhất, mang hơi thở của những xu hướng đang thịnh hành. Với BST này, bạn có thể tự tin thể hiện phong cách riêng của mình và luôn nổi bật trong mọi hoàn cảnh.
         </div>
-        <button class="bst-button">XEM CHI TIẾT</button>
+        <button class="bst-button" (click)="navigateToProducts()">XEM CHI TIẾT</button>
       </div>
     </div>
 
@@ -122,7 +123,7 @@
         <div class="bst-description">
           Bạn đã sẵn sàng đón Giáng Sinh cùng gấu bông siêu đáng yêu chưa? Fluffy Store sắp ra mắt "BST Giáng Sinh" với những mẫu gấu bông độc đáo và mềm mại. Hãy cùng đếm ngược và chờ đón những bất ngờ thú vị từ Fluffy nhé!
         </div>
-        <button class="bst-button">XEM CHI TIẾT</button>
+        <button class="bst-button" (click)="navigateToProducts()">XEM CHI TIẾT</button>
       </div>
     </div>
   </div>
