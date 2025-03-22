@@ -153,7 +153,7 @@ export class ProductDetailComponent implements OnInit {
     this.router.navigate(['/product', productId]);
   }
 
-  toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
-  }
+  // toggleFavorite() {
+  //   this.isFavorite = !this.isFavorite;
+  // }
 }
