@@ -6,6 +6,12 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../../services/product-detail.service';
 
+interface Slide {
+  image: string;
+  title: string;
+  description: string;
+}
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -14,7 +20,7 @@ import { Product } from '../../../services/product-detail.service';
   standalone: true
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  currentIndex = 0;
+  currentSlideIndex = 0;
   slideInterval: any;
   discountedProducts: Product[] = [];
   displayedProducts: Product[] = [];
@@ -34,10 +40,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
   selectedSize: string | null = null;
   product: Product | null = null;
 
-  slides = [
+  slides: string[] = [
     "https://theme.hstatic.net/200000856317/1001220433/14/slide_1_mb.jpg?v=324",
-    "/assets/images/homepage/2.png",
-    "/assets/images/homepage/3.png"
+    "../../assets/images/homepage/2.png",
+    "../../assets/images/homepage/3.png"
   ];
 
   // Banner properties
@@ -66,19 +72,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   getTransformStyle() {
-    return `translateX(-${this.currentIndex * 100}%)`;
+    return `translateX(-${this.currentSlideIndex * 100}%)`;
   }
 
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
   }
 
   prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    this.currentSlideIndex = (this.currentSlideIndex - 1 + this.slides.length) % this.slides.length;
   }
 
   currentSlide(index: number) {
-    this.currentIndex = index;
+    this.currentSlideIndex = index;
     // Reset auto slide timer when manually changing slides
     if (this.slideInterval) {
       clearInterval(this.slideInterval);

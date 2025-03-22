@@ -1,10 +1,12 @@
 <div class="slider-container">
   <div class="slider">
-    <img *ngFor="let slide of slides; let i = index" 
-         [src]="slide" 
-         [class.active]="i === currentIndex"
-         class="slide-image" 
-         alt="Slider image">
+    <div *ngFor="let slide of slides; let i = index" 
+         [class.active]="i === currentSlideIndex"
+         class="slide">
+      <img [src]="slide" 
+           class="slide-image" 
+           alt="Slider image">
+    </div>
   </div>
   
   <div class="slider-controls">
@@ -15,7 +17,7 @@
   <div class="slider-dots">
     <span *ngFor="let slide of slides; let i = index" 
           class="dot" 
-          [class.active]="i === currentIndex"
+          [class.active]="i === currentSlideIndex"
           (click)="currentSlide(i)">
     </span>
   </div>
@@ -129,8 +131,8 @@
 
 
   <!-- VỀ FLUFFY -->
+  <h2>VỀ FLUFFY</h2>
   <div class="about-us">
-    <h2>VỀ FLUFFY</h2>
     <div class="about-container">
       <img src="https://theme.hstatic.net/200000856317/1001220433/14/about01_banner_bkg.jpg?v=324">
       <div class="about-content">
