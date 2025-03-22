@@ -53,18 +53,18 @@ export class HomePageComponent implements OnInit, OnDestroy {
   slides: Slide[] = [
     {
       image: "https://theme.hstatic.net/200000856317/1001220433/14/slide_1_mb.jpg?v=324",
-      title: "Bộ sưu tập mới nhất",
-      description: "Khám phá những thiết kế độc đáo và thời trang"
+      title: "",
+      description: ""
     },
     {
       image: "../../assets/images/homepage/2.png",
-      title: "Ưu đãi đặc biệt",
-      description: "Giảm giá lên đến 50% cho các sản phẩm bán chạy"
+      title: "",
+      description: ""
     },
     {
       image: "../../assets/images/homepage/3.png",
-      title: "Phong cách độc đáo",
-      description: "Thể hiện cá tính của bạn với những thiết kế độc nhất"
+      title: "",
+      description: ""
     }
   ];
 
