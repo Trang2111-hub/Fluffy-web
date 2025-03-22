@@ -45,7 +45,7 @@
           </div>
           <div class="product-title-container">
             <h1 class="product-title">{{ product.product_name }}</h1>
-            <button class="favorite-button">
+            <button class="favorite-button" [class.active]="isFavorite" (click)="toggleFavorite()">
               <i class="fas fa-heart"></i>
             </button>
           </div>
@@ -206,7 +206,11 @@
   
           <div class="review-cta">
             <p class="review-prompt">
+<<<<<<< HEAD
               Chia sẻ đánh giá của bạn về sản phẩm này
+=======
+              Chia sẽ đánh giá của bạn về sản phẩm này
+>>>>>>> feature/register
             </p>
             <button class="write-review-button">
               <img src="../../assets/icons/product-detail/write_review.png" alt="Write" class="write-icon">

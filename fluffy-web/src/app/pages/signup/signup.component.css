@@ -1,4 +1,3 @@
-
 .container {
     display: flex;
     align-items: center;
@@ -20,10 +19,10 @@
     flex: 1;
     background: #D9D9D980;
     padding: 50px;
-    max-width: 350px;
+    max-width: 450px;
     height: auto;
     margin-top: 40px;
-    margin-right: 180px;
+    margin-right: 10%;
 }
 .title {
     font-size: 22px;
@@ -35,16 +34,26 @@
 }
 .input-group {
     margin-bottom: 15px;
+    position: relative;
 }
 .input-group input {
-    width: 93%;
+    width: 100%;
     padding: 12px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 .password-group {
     position: relative;
+}
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
 }
 .term-of-use {
     display: flex;
@@ -52,7 +61,14 @@
     font-size: 14px;
     margin-bottom: 20px;
 }
-.forgot-password {
+.login{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.login-text {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: bold ;
@@ -71,23 +87,11 @@
 .signup-btn:hover{
     background-color: var(--hover-button);
 }
-.login{
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-.login-text {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold ;
-}
 .hr {
     border: 1px solid var(--primary-color);
     margin-bottom: 10px; 
 }
-.social-signup p {
+.social-login p {
     font-size: 18px;
     font-weight: bold; 
     margin-top: 5px; 
@@ -110,9 +114,14 @@
     height: auto;
 }
 .error-message {
-    color: red;
+    color: #d9534f;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    background-color: rgba(217, 83, 79, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 3px solid #d9534f;
 }
 
 

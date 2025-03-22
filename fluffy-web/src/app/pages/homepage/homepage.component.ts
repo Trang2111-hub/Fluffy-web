@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl,FormGroup } from '@angular/forms';
+
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-homepage',
   standalone: true,
   imports: [],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  templateUrl: './homepage.component.html',
+  styleUrl: './homepage.component.css'
 })
-export class HomePageComponent implements OnInit{
+
+export class HomePageComponent implements OnInit {
   currentIndex = 0;
   slides = [
     'https://theme.hstatic.net/200000856317/1001220433/14/slide_1_mb.jpg?v=324',
@@ -21,7 +22,6 @@ export class HomePageComponent implements OnInit{
     { icon: 'https://img.icons8.com/?size=100&id=487&format=png&color=EB5265', title: 'GIAO HÀNG NHANH', description: 'Giao hàng nhanh chóng, đóng gói cẩn thận' },
     { icon: 'https://img.icons8.com/?size=100&id=2i2jDnoEm4ER&format=png&color=EB5265', title: 'SẢN PHẨM THIẾT KẾ ĐỘC QUYỀN', description: 'Các loại thú bông độc quyền chỉ có tại nhà FLUFFY' }
   ];
-
   ngOnInit() {
     setInterval(() => {
       this.changeSlide(1);
@@ -41,4 +41,5 @@ export class HomePageComponent implements OnInit{
   setSlide(index: number) {
     this.currentIndex = index;
   }
+  
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { FilterComponent } from './filter/filter.component';
 import { SortComponent } from './sort/sort.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -21,35 +20,15 @@ export class ProductPageComponent implements OnInit {
   error: string | null = null;
   noProductsMessage: string = '';
 
-  constructor(
-    private productService: ProductService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.loading = true;
-    
-    // Lắng nghe query params từ URL
-    this.route.queryParams.subscribe(params => {
-      const collection = params['collection'];
-      this.loadProducts(collection);
-    });
-  }
-
-  loadProducts(collection?: string) {
     this.productService.getProducts().subscribe({
       next: (data) => {
+        console.log('Products received:', data);
         this.products = data;
-        if (collection) {
-          this.sortedProducts = this.products.filter(product => 
-            product.collection.toLowerCase().includes(collection.toLowerCase())
-          );
-          if (this.sortedProducts.length === 0) {
-            this.noProductsMessage = `Không tìm thấy sản phẩm nào thuộc danh mục "${collection}"`;
-          }
-        } else {
-          this.sortedProducts = [...data];
-        }
+        this.sortedProducts = [...data];
         this.loading = false;
       },
       error: (error) => {
@@ -62,28 +41,21 @@ export class ProductPageComponent implements OnInit {
 
   handleFilter(filters: any) {
     this.noProductsMessage = '';
+    
+    console.log('Applying filters:', filters);
+    
     let filtered = [...this.products];
 
-    // Filter by collection from URL (ưu tiên)
-    const collectionFromUrl = this.route.snapshot.queryParams['collection'];
-    if (collectionFromUrl) {
-      filtered = filtered.filter(product =>
-        product.collection.toLowerCase().includes(collectionFromUrl.toLowerCase())
-      );
-    }
-
-    // Các filter khác từ component Filter
+    // Filter by collection
     if (filters.collections && filters.collections.length > 0) {
-      filtered = filtered.filter(product =>
-        filters.collections.some((col: string) => 
-          product.collection.toLowerCase().includes(col.toLowerCase())
-        )
+      filtered = filtered.filter(product => 
+        filters.collections.includes(product.collection)
       );
     }
 
     // Lọc theo màu
     if (filters.colors && filters.colors.length > 0) {
-      filtered = filtered.filter(product =>
+      filtered = filtered.filter(product => 
         filters.colors.some((color: any) => product.color.selected_colors.includes(color))
       );
     }
@@ -115,15 +87,15 @@ export class ProductPageComponent implements OnInit {
 
   handleSort(sortOption: string) {
     this.sortedProducts = [...this.sortedProducts];
-   
+    
     if (sortOption === 'price-asc') {
-      this.sortedProducts.sort((a, b) =>
-        parseFloat(a.pricing.original_price.replace(/[^0-9]/g, '')) -
+      this.sortedProducts.sort((a, b) => 
+        parseFloat(a.pricing.original_price.replace(/[^0-9]/g, '')) - 
         parseFloat(b.pricing.original_price.replace(/[^0-9]/g, ''))
       );
     } else if (sortOption === 'price-desc') {
-      this.sortedProducts.sort((a, b) =>
-        parseFloat(b.pricing.original_price.replace(/[^0-9]/g, '')) -
+      this.sortedProducts.sort((a, b) => 
+        parseFloat(b.pricing.original_price.replace(/[^0-9]/g, '')) - 
         parseFloat(a.pricing.original_price.replace(/[^0-9]/g, ''))
       );
     } else if (sortOption === 'rating-asc') {
@@ -131,11 +103,11 @@ export class ProductPageComponent implements OnInit {
     } else if (sortOption === 'rating-desc') {
       this.sortedProducts.sort((a, b) => b.rating - a.rating);
     } else if (sortOption === 'name-asc') {
-      this.sortedProducts.sort((a, b) =>
+      this.sortedProducts.sort((a, b) => 
         (a.product_name || '').localeCompare(b.product_name || '')
       );
     } else if (sortOption === 'name-desc') {
-      this.sortedProducts.sort((a, b) =>
+      this.sortedProducts.sort((a, b) => 
         (b.product_name || '').localeCompare(a.product_name || '')
       );
     }

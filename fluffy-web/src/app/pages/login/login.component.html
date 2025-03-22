@@ -1,38 +1,81 @@
 <div class="container">
     <div class="logo-section">
-        <img src="../../assets/images/login/logoFluffy.png" alt="Fluffy Logo">
+        <img src="assets/images/login/logoFluffy.png" alt="Fluffy Logo">
     </div>
     <div class="login-box">
         <h2 class="title">ĐĂNG NHẬP</h2>
+        
+        <!-- Login form -->
         <form (submit)="onLogin($event)">
-            <div class="input-group">
-                <input type="email" placeholder="Nhập email" [(ngModel)]="email" name="email" required>
+          <!-- Email input -->
+          <div class="input-group">
+            <input 
+              type="email" 
+              placeholder="Nhập email" 
+              [(ngModel)]="email" 
+              name="email" 
+              required
+              [disabled]="isLoading">
+          </div>
+          
+          <!-- Password input -->
+          <div class="input-group password-group">
+            <input 
+              [type]="showPassword ? 'text' : 'password'" 
+              placeholder="Nhập mật khẩu" 
+              [(ngModel)]="password" 
+              name="password" 
+              required
+              [disabled]="isLoading">
+            <span class="toggle-password" (click)="togglePasswordVisibility()">
+              {{ showPassword ? '🙈' : '👁️' }}
+            </span>
+          </div>
+          
+          <!-- Error message -->
+          <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+          
+          <!-- Remember me & Forgot password -->
+          <div class="remember-forgot">
+            <label>
+              <input 
+                type="checkbox" 
+                [(ngModel)]="rememberMe" 
+                name="rememberMe"
+                [disabled]="isLoading"> 
+              Ghi nhớ đăng nhập
+            </label>
+            <a href="#" class="forgot-password">Quên mật khẩu?</a>
+          </div>
+          
+          <!-- Login button -->
+          <button 
+            type="submit" 
+            class="login-btn" 
+            [disabled]="isLoading">
+            {{ isLoading ? 'Đang đăng nhập...' : 'Đăng nhập' }}
+          </button>
+          
+          <!-- Register link -->
+          <div class="register">
+            <div class="register-text">Nếu chưa có tài khoản? </div>
+            <a routerLink="/signup">Đăng ký</a>
+          </div>
+          
+          <hr class="hr">
+          
+          <!-- Social login -->
+          <div class="social-login">
+            <p><b>Hoặc đăng nhập với</b></p>
+            <div class="social-buttons">
+              <a href="https://www.facebook.com/" target="_blank" class="social-btn facebook">
+                <img src="assets/images/login/facebook.png" alt="Facebook"> 
+              </a>
+              <a href="https://accounts.google.com/" target="_blank" class="social-btn google">
+                <img src="assets/images/login/google.png" alt="Google">
+              </a>
             </div>
-            <div class="input-group password-group">
-                <input [type]="showPassword ? 'text' : 'password'" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password" required>
-            </div>
-            <div class="remember-forgot">
-                <label><input type="checkbox" [(ngModel)]="rememberMe"> Ghi nhớ đăng nhập</label>
-                <a href="#" class="forgot-password">Quên mật khẩu?</a>
-            </div>
-            <button type="submit" class="login-btn">Đăng nhập</button>
-            <div class="register">
-                <div class="register-text">Nếu chưa có tài khoản? </div>
-                <a [routerLink]= "['/signup']">Đăng ký</a>
-            </div>
-            <hr class="hr">
-            <div class="social-login">
-                <p><b>Hoặc đăng nhập với</b></p>
-                <div class="social-buttons">
-                    <a href="https://www.facebook.com/" target="_blank" class="social-btn facebook">
-                        <img src="../../assets/images/login/facebook.png" alt="Facebook"> 
-                    </a>
-                    <a href="https://accounts.google.com/" target="_blank" class="social-btn google">
-                        <img src="../../assets/images/login/google.png" alt="Google">
-                    </a>
-                </div>
-            </div>
-            
+          </div>
         </form>
     </div>
 </div>

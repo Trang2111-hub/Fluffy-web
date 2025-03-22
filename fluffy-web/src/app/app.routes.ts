@@ -9,6 +9,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { AboutFluffyComponent } from './pages/about-fluffy/about-fluffy.component';
 import { SalespolicyComponent } from './pages/salespolicy/salespolicy.component';
+import { authGuard } from './guards/auth.guard';
+
 export const routes: Routes = [
   {
     path: '',
@@ -32,11 +34,13 @@ export const routes: Routes = [
   },
   {
     path: 'payment',
-    component: PaymentComponent
+    component: PaymentComponent,
+    canActivate: [authGuard]  
   },
   {
     path: 'account-settings',
-    component: AccountSettingsComponent
+    component: AccountSettingsComponent,
+    canActivate: [authGuard] 
   },
   {
     path: 'cart',

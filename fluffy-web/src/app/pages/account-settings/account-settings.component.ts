@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-account-settings',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './account-settings.component.html',
   styleUrls: ['./account-settings.component.css']
