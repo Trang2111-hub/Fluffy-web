@@ -32,15 +32,11 @@ export class HeaderComponent implements OnInit {
   //   });
   // }
 
-
   ngOnInit() {
     this.cartService.getCartItemCount().subscribe((count: number) => {
       this.cartItemCount = count;
     });
   }
-
-
-
 
   // Theo dõi sự kiện cuộn trang
   @HostListener('window:scroll', [])

@@ -49,15 +49,5 @@ export class ProductService {
   getRelatedProducts(productId: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}/products/related/${productId}`);
   }
+} 
 
-  // Lấy sản phẩm bán chạy
-  getBestSellingProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products/best-selling`);
-  } 
-
-// Lấy sản phẩm khuyến mãi
-  getDiscountedProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products/discounted`);
-  }
-
-}
