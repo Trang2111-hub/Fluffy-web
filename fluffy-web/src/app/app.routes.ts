@@ -7,8 +7,8 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
-
-
+import { AboutFluffyComponent } from './pages/about-fluffy/about-fluffy.component';
+import { SalespolicyComponent } from './pages/salespolicy/salespolicy.component';
 export const routes: Routes = [
   {
     path: '',
@@ -41,6 +41,14 @@ export const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent
+  },
+  {
+    path: 'about-fluffy',
+    component: AboutFluffyComponent
+  },
+  {
+    path: 'salespolicy',
+    component: SalespolicyComponent
   },
   {
     path: '**',

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../../services/product-detail.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 interface Slide {
   image: string;
@@ -12,105 +13,140 @@ interface Slide {
   description: string;
 }
 
+interface Benefit {
+  icon: string;
+  title: string;
+  description: string;
+}
+
 @Component({
   selector: 'app-home-page',
+  standalone: true,
+  imports: [CommonModule, RouterModule, ProductCardComponent],
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css'],
-  imports: [CommonModule, ProductCardComponent, RouterModule],
-  standalone: true
+  styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   currentSlideIndex = 0;
-  slideInterval: any;
+  slideInterval: number | null = null;
   discountedProducts: Product[] = [];
   displayedProducts: Product[] = [];
   bestSellingProducts: Product[] = [];
   displayedBestSelling: Product[] = [];
   currentProductIndex = 0;
   currentBestSellingIndex = 0;
-  loading: boolean = true;
+  loading = true;
   error: string | null = null;
   productsPerPage = 4;
-  displayCount: number = 4;
-  isFavorite: boolean = false;
+  displayCount = 4;
+  isFavorite = false;
 
-  // Các biến cho sản phẩm
-  quantity: number = 1;
+  // Form related properties
+  form: FormGroup;
+
+  // Product related properties
+  quantity = 1;
   selectedColor: string | null = null;
   selectedSize: string | null = null;
   product: Product | null = null;
 
-  slides: string[] = [
-    "https://theme.hstatic.net/200000856317/1001220433/14/slide_1_mb.jpg?v=324",
-    "../../assets/images/homepage/2.png",
-    "../../assets/images/homepage/3.png"
+  slides: Slide[] = [
+    {
+      image: "https://theme.hstatic.net/200000856317/1001220433/14/slide_1_mb.jpg?v=324",
+      title: "Bộ sưu tập mới nhất",
+      description: "Khám phá những thiết kế độc đáo và thời trang"
+    },
+    {
+      image: "../../assets/images/homepage/2.png",
+      title: "Ưu đãi đặc biệt",
+      description: "Giảm giá lên đến 50% cho các sản phẩm bán chạy"
+    },
+    {
+      image: "../../assets/images/homepage/3.png",
+      title: "Phong cách độc đáo",
+      description: "Thể hiện cá tính của bạn với những thiết kế độc nhất"
+    }
   ];
 
-  // Banner properties
-  banners = this.slides;
-  currentBannerIndex: number = 0;
-  currentBanner: string = this.banners[0];
+  benefits: Benefit[] = [
+    {
+      icon: "assets/icons/quality.png",
+      title: "Chất lượng cao",
+      description: "Sản phẩm được kiểm tra kỹ lưỡng"
+    },
+    {
+      icon: "assets/icons/shipping.png",
+      title: "Giao hàng nhanh",
+      description: "Miễn phí vận chuyển"
+    },
+    {
+      icon: "assets/icons/support.png",
+      title: "Hỗ trợ 24/7",
+      description: "Luôn sẵn sàng phục vụ"
+    }
+  ];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private formBuilder: FormBuilder
   ) {
     this.updateDisplayCount();
+    this.form = this.formBuilder.group({});
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.startAutoSlide();
     this.loadDiscountedProducts();
     this.loadBestSellingProducts();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
     }
   }
 
-  getTransformStyle() {
+  getTransformStyle(): string {
     return `translateX(-${this.currentSlideIndex * 100}%)`;
   }
 
-  nextSlide() {
+  nextSlide(): void {
     this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
   }
 
-  prevSlide() {
+  prevSlide(): void {
     this.currentSlideIndex = (this.currentSlideIndex - 1 + this.slides.length) % this.slides.length;
   }
 
-  currentSlide(index: number) {
+  currentSlide(index: number): void {
     this.currentSlideIndex = index;
-    // Reset auto slide timer when manually changing slides
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
       this.startAutoSlide();
     }
   }
 
-  startAutoSlide() {
+  startAutoSlide(): void {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
     }
-    this.slideInterval = setInterval(() => {
+    this.slideInterval = window.setInterval(() => {
       this.nextSlide();
-    }, 5000); // Changed to 5 seconds for better UX
+    }, 5000);
   }
 
   @HostListener('window:resize')
-  onResize() {
+  onResize(): void {
     this.updateDisplayCount();
   }
 
-  private updateDisplayCount() {
+  private updateDisplayCount(): void {
     this.displayCount = window.innerWidth <= 1280 ? 3 : 4;
   }
 
-  loadDiscountedProducts() {
+  loadDiscountedProducts(): void {
     this.loading = true;
     this.error = null;
 
@@ -121,7 +157,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     Promise.all(promises)
       .then(products => {
-        this.discountedProducts = products.filter(p => p !== null) as Product[];
+        this.discountedProducts = products.filter((p): p is Product => p !== null);
         this.updateDisplayedProducts();
         this.loading = false;
       })
@@ -132,19 +168,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
       });
   }
 
-  updateDisplayedProducts() {
+  updateDisplayedProducts(): void {
     const start = this.currentProductIndex;
     const end = start + this.productsPerPage;
     this.displayedProducts = this.discountedProducts.slice(start, end);
   }
 
-  nextProducts() {
+  nextProducts(): void {
     const maxStartIndex = Math.max(0, this.discountedProducts.length - this.productsPerPage);
     this.currentProductIndex = Math.min(this.currentProductIndex + this.productsPerPage, maxStartIndex);
     this.updateDisplayedProducts();
   }
 
-  prevProducts() {
+  prevProducts(): void {
     this.currentProductIndex = Math.max(0, this.currentProductIndex - this.productsPerPage);
     this.updateDisplayedProducts();
   }
@@ -161,24 +197,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     return new Intl.NumberFormat('vi-VN').format(discountPrice) + '₫'; 
   }
 
-  increaseQuantity() {
-    this.quantity++;
-  }
-
-  decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
-  }
-
-  selectColor(color: string) {
-    this.selectedColor = color;
-  }
-
-  selectSize(size: string) {
-    this.selectedSize = size;
-  }
-
   calculateOriginalPrice(discountedPrice: string, discountPercentage: string): string {
     const priceValue = parseFloat(discountedPrice.replace(/\./g, '').replace(' đ', ''));
     const discountValue = parseFloat(discountPercentage.replace('%', ''));
@@ -191,30 +209,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     return new Intl.NumberFormat('vi-VN').format(originalPrice) + ' đ';
   }
 
-  addToCart() {
-    if (!this.product) return;
-    console.log('Adding to cart:', {
-      product: this.product,
-      quantity: this.quantity,
-      color: this.selectedColor,
-      size: this.selectedSize
-    });
-  }
-
-  buyNow() {
-    this.addToCart();
-    this.router.navigate(['/payment']);
-  }
-
-  navigateToDiscountedProduct(productId: number) {
-    this.router.navigate(['/product', productId]);
-  }
-
-  toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
-  }
-
-  loadBestSellingProducts() {
+  loadBestSellingProducts(): void {
     const productIds = [75, 76, 77, 78, 79, 80, 81, 82, 83];
     const promises = productIds.map(id => 
       this.productService.getProductById(id).toPromise()
@@ -222,7 +217,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     Promise.all(promises)
       .then(products => {
-        this.bestSellingProducts = products.filter(p => p !== null) as Product[];
+        this.bestSellingProducts = products.filter((p): p is Product => p !== null);
         this.updateDisplayedBestSelling();
       })
       .catch(error => {
@@ -231,36 +226,28 @@ export class HomePageComponent implements OnInit, OnDestroy {
       });
   }
 
-  updateDisplayedBestSelling() {
+  updateDisplayedBestSelling(): void {
     const start = this.currentBestSellingIndex;
     const end = start + this.productsPerPage;
     this.displayedBestSelling = this.bestSellingProducts.slice(start, end);
   }
 
-  nextBestSelling() {
+  nextBestSelling(): void {
     const maxStartIndex = Math.max(0, this.bestSellingProducts.length - this.productsPerPage);
     this.currentBestSellingIndex = Math.min(this.currentBestSellingIndex + this.productsPerPage, maxStartIndex);
     this.updateDisplayedBestSelling();
   }
 
-  prevBestSelling() {
+  prevBestSelling(): void {
     this.currentBestSellingIndex = Math.max(0, this.currentBestSellingIndex - this.productsPerPage);
     this.updateDisplayedBestSelling();
   }
 
-  navigateToProduct(productId: number) {
+  navigateToProduct(productId: number): void {
     this.router.navigate(['/product', productId]);
   }
 
-  showBanner(index: number) {
-    this.currentBannerIndex = index;
-    this.currentBanner = this.banners[index];
+  showBanner(index: number): void {
+    this.currentSlideIndex = index;
   }
-
-  benefits = [
-    { icon: 'https://img.icons8.com/?size=100&id=pxWwSVIqQ14n&format=png&color=EB5265', title: 'KHUYẾN MÃI LIÊN TỤC', description: 'Có rất nhiều deal hot, voucher, mã giảm giá' },
-    { icon: 'https://img.icons8.com/?size=100&id=Cgu81kzSlCZy&format=png&color=EB5265', title: 'TƯ VẤN TRỰC TUYẾN', description: 'Được tư vấn kỹ càng, tận tình và nhanh chóng' },
-    { icon: 'https://img.icons8.com/?size=100&id=487&format=png&color=EB5265', title: 'GIAO HÀNG NHANH', description: 'Giao hàng nhanh chóng, đóng gói cẩn thận' },
-    { icon: 'https://img.icons8.com/?size=100&id=2i2jDnoEm4ER&format=png&color=EB5265', title: 'SẢN PHẨM THIẾT KẾ ĐỘC QUYỀN', description: 'Các loại thú bông độc quyền chỉ có tại nhà FLUFFY' }
-  ];
 }

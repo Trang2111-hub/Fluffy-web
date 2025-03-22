@@ -5,7 +5,7 @@ import { CartService } from '../../../services/cart.service';
 import { ProductService } from '../../../services/product.service';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../../../app/pages/product-page/models/product.model';
-
+import { Router, RouterModule } from '@angular/router';
 interface CartProduct extends Product {
   quantity: number;
   totalPrice: number;
@@ -17,7 +17,7 @@ interface CartProduct extends Product {
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   standalone: true,
 })
 export class CartComponent implements OnInit {
@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
     return this.isOpen;
   }
 
-  constructor(private cartService: CartService, private productService: ProductService) {}
+  constructor(private cartService: CartService, private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
     this.cartService.isCartOpen$.subscribe(isOpen => {
@@ -147,4 +147,12 @@ export class CartComponent implements OnInit {
     this.isCartOpenSubject.next(!this.isCartOpenSubject.value);
     document.body.style.overflow = this.isCartOpenSubject.value ? 'hidden' : 'auto';
   }
+
+  goToCheckout() {
+    this.closeCart(); // Đóng giỏ hàng
+    setTimeout(() => {
+    this.router.navigate(['/payment']);
+  }, 200); // Đợi 200ms để UI cập nhật
+  }
+
 }

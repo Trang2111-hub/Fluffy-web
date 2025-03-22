@@ -1,11 +1,12 @@
+<!-- Slider Banner -->
 <div class="slider-container">
   <div class="slider">
     <div *ngFor="let slide of slides; let i = index" 
          [class.active]="i === currentSlideIndex"
          class="slide">
-      <img [src]="slide" 
+      <img [src]="slide.image" 
            class="slide-image" 
-           alt="Slider image">
+           [alt]="slide.title">
     </div>
   </div>
   
@@ -24,7 +25,6 @@
 </div>
 
 <div class="main-container">
-
   <!-- SẢN PHẨM BÁN CHẠY -->
   <div class="best-seller">
     <div class="header">
@@ -96,13 +96,12 @@
     </div>
   </div>
 
-
   <!-- BỘ SƯU TẬP -->
   <h2>BỘ SƯU TẬP MỚI</h2>
   <div class="bst">
     <!-- BST Fashion -->
     <div class="bst-container">
-      <img src="https://theme.hstatic.net/200000856317/1001220433/14/img_home_banner_desktop_1.jpg?v=324  " alt="BST Fashion">
+      <img src="https://theme.hstatic.net/200000856317/1001220433/14/img_home_banner_desktop_1.jpg?v=324" alt="BST Fashion">
       <div class="card-content">
         <div class="card-title">
           <h3>BST FASHION IS IN THE AIR</h3>
@@ -116,7 +115,7 @@
   
     <!-- BST Giáng Sinh -->
     <div class="bst-container">
-      <img src="https://theme.hstatic.net/200000856317/1001220433/14/img_home_banner_desktop_2.jpg?v=324"  alt="BST Giáng Sinh">
+      <img src="https://theme.hstatic.net/200000856317/1001220433/14/img_home_banner_desktop_2.jpg?v=324" alt="BST Giáng Sinh">
       <div class="card-content">
         <div class="card-title">
           <h3>BST GIÁNG SINH</h3>
@@ -129,23 +128,21 @@
     </div>
   </div>
 
-
   <!-- VỀ FLUFFY -->
   <h2>VỀ FLUFFY</h2>
   <div class="about-us">
     <div class="about-container">
-      <img src="https://theme.hstatic.net/200000856317/1001220433/14/about01_banner_bkg.jpg?v=324">
+      <img src="https://theme.hstatic.net/200000856317/1001220433/14/about01_banner_bkg.jpg?v=324" alt="About Fluffy">
       <div class="about-content">
-        <div class = "about-text">
+        <div class="about-text">
           Tại <span class="highlight">Fluffy</span>, chúng tôi tin rằng mỗi đứa trẻ đều cần được che chở, yêu thương và ấm áp bởi những điều ấm áp nhất. Với slogan <span class="highlight">"Warm hug, warm heart"</span>, <span class="highlight">Fluffy</span> mong muốn đem niềm vui và sự an ủi cho mọi đứa trẻ.
           <span class="highlight">Fluffy</span> luôn nỗ lực cung cấp những chú gấu bông mềm mại, đáng yêu, được thiết kế tỉ mỉ và an toàn cho sức khỏe. Mang đến cho khách hàng không chỉ những sản phẩm chất lượng mà còn là những trải nghiệm mua sắm tuyệt vời, để mỗi người đến với <span class="highlight">Fluffy</span> đều cảm nhận được sự ấm áp và yêu thương.
-      </div>
+        </div>
       </div>
     </div>
   </div>
 
-
-  <!-- ĐIỂM NỔI BẬT  -->
+  <!-- ĐIỂM NỔI BẬT -->
   <div class="benefits-container">
     <div class="benefit-item" *ngFor="let benefit of benefits">
       <img [src]="benefit.icon" [alt]="benefit.title">
@@ -154,3 +151,4 @@
     </div>
   </div>
 </div>
+ 
