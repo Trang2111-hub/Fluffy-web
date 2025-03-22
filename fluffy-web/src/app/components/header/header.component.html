@@ -7,17 +7,35 @@
         <p>Warm hug, warm heart</p>
       </div>
     </div>
+
     <div class="search-bar">
       <input type="text" placeholder="Search">
       <i class="fas fa-search"></i>
     </div>
+
     <div class="nav-icons">
-      <a>
-        <div>
-          <i class="fas fa-truck"></i>
-          <span>Tra cứu <br> đơn hàng</span>
+      <!-- Order Tracking Container -->
+      <div class="order-tracking-container">
+        <a (click)="toggleOrderTrackingPopup($event)">
+          <div>
+            <i class="fas fa-truck"></i>
+            <span>Tra cứu <br> đơn hàng</span>
+          </div>
+        </a>
+        <div class="order-tracking-popup" *ngIf="isOrderTrackingPopupOpen">
+          <div class="popup-content">
+            <div class="mb-4">
+              <input type="text" placeholder="Nhập mã đơn hàng" class="search-bar-input" />
+            </div>
+            <div class="mb-4">
+              <input type="text" placeholder="Nhập email hoặc số điện thoại" class="search-bar-input" />
+            </div>
+            <button class="track-button">Kiểm tra đơn hàng</button>
+          </div>
         </div>
-      </a>
+      </div>
+
+      <!-- Giỏ hàng -->
       <a class="cart-icon" (click)="openCart($event)">
         <div class="header-cart-icon">
           <i class="fas fa-shopping-cart"></i>
@@ -25,12 +43,16 @@
           <span>Giỏ <br> hàng</span>
         </div>
       </a>
+
+      <!-- Thông báo -->
       <a>
         <div>
           <i class="fas fa-bell"></i>
           <span>Thông <br> báo</span>
         </div>
       </a>
+
+      <!-- Tài khoản -->
       <a *ngIf="!isLoggedIn" [routerLink]="['/login']">
         <div>
           <i class="fas fa-user"></i>
@@ -46,17 +68,52 @@
     </div>
   </div>
 
+  <!-- Menu điều hướng -->
   <nav class="nav" [ngClass]="{'sticky-nav': isScrolled}">
     <div class="menu">
       <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <div class="menu-item">TRANG CHỦ</div>
       </a>
-      <a [routerLink]="['/product-page']" routerLinkActive="active">
-        <div class="menu-item">SẢN PHẨM <i class="fas fa-chevron-down"></i></div>
-      </a>
-      <a [routerLink]="['/product-page']" routerLinkActive="active">
-        <div class="menu-item">BỘ SƯU TẬP <i class="fas fa-chevron-down"></i></div>
-      </a>
+      
+      <!-- Dropdown Sản phẩm -->
+      <div class="menu-item dropdown-container" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+        <a routerLinkActive="active">
+          SẢN PHẨM <i class="fas fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-menu" *ngIf="isDropdownVisible">
+          <a [routerLink]="['/product-page']" (click)="filterByCollection('')" class="dropdown-item">
+            Tất cả sản phẩm
+          </a>
+          <a [routerLink]="['/product-page']" (click)="filterByCollection('Gấu bông hoạt hình')" class="dropdown-item">
+            Gấu bông hoạt hình
+          </a>
+          <a [routerLink]="['/product-page']" (click)="filterByCollection('Gấu Teddy')" class="dropdown-item">
+            Gấu Teddy
+          </a>
+          <a [routerLink]="['/product-page']" (click)="filterByCollection('Gối bông')" class="dropdown-item">
+            Gối bông
+          </a>
+          <a [routerLink]="['/product-page']" (click)="filterByCollection('Thú bông')" class="dropdown-item">
+            Thú bông
+          </a>
+          <a [routerLink]="['/product-page']" (click)="filterByCollection('Gấu quà tặng')" class="dropdown-item">
+            Gấu bông quà tặng
+          </a>
+        </div>
+      </div>
+
+      <!-- Dropdown Bộ sưu tập -->
+      <div class="menu-item dropdown-container" (mouseenter)="showCollectionDropdown()" (mouseleave)="hideCollectionDropdown()">
+        <a routerLinkActive="active">
+          BỘ SƯU TẬP <i class="fas fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-menu" *ngIf="isCollectionDropdownVisible">
+          <a [routerLink]="['/product-page']" (click)="filterByCollection('Bộ sưu tập')" class="dropdown-item">
+            Bộ sưu tập
+          </a>
+        </div>
+      </div>
+
       <a [routerLink]="['/about-fluffy']" routerLinkActive="active">
         <div class="menu-item">VỀ FLUFFY</div>
       </a>
