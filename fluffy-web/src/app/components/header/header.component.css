@@ -73,7 +73,7 @@ body.scrolled {
     display: flex;
     align-items: center;
     color: #000000;
-    position: relative; /* Đảm bảo định vị tương đối cho popup */
+    position: relative;
 }
 
 .nav-icons div {
@@ -209,14 +209,12 @@ body.scrolled {
     justify-content: center;
 }
 
-/* Các style cũ giữ nguyên, chỉ thêm phần sau */
-
 .order-tracking-container {
     position: relative;
     display: inline-block;
-  }
-  
-  .order-tracking-popup {
+}
+
+.order-tracking-popup {
     position: absolute;
     top: 100%;
     left: 0;
@@ -226,32 +224,60 @@ body.scrolled {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 1001;
-  }
-  
-  .popup-content {
+}
+
+.popup-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .search-bar-input {
+}
+
+.search-bar-input {
     background-color: #e5e7eb;
     border-radius: 9999px;
     padding: 10px 20px;
     width: 250px;
     border: none;
     margin-bottom: 10px;
-  }
-  
-  .track-button {
+}
+
+.track-button {
     background-color: var(--primary-color, #EB5265);
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 9999px;
     cursor: pointer;
-  }
-  
-  .track-button:hover {
+}
+
+.track-button:hover {
     opacity: 0.8;
-  }  
+}
+
+/* Dropdown Styles */
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #EB5265; /* Đảm bảo background trắng */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 1001;
+    border-radius: 4px; /* Thêm bo góc cho dropdown */
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #EB5265; /* Nền trắng khi không hover */
+}
+
+.dropdown-item:hover {
+    background-color: #F7D0E2; /* Nền màu hồng khi hover */
+}

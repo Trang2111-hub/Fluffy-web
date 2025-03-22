@@ -17,11 +17,14 @@ export class HeaderComponent implements OnInit {
   cartItemCount: number = 0;
   isScrolled: boolean = false;
   isOrderTrackingPopupOpen: boolean = false;
+  isDropdownVisible: boolean = false; // Dropdown cho SẢN PHẨM
+  isCollectionDropdownVisible: boolean = false; // Dropdown cho BỘ SƯU TẬP
+  selectedCollection: string = '';
 
   constructor(
     private router: Router,
     private cartService: CartService,
-    private elementRef: ElementRef // Để truy cập DOM
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -40,7 +43,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  // Đóng popup khi click ra ngoài
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
@@ -92,5 +94,32 @@ export class HeaderComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.isOrderTrackingPopupOpen = !this.isOrderTrackingPopupOpen;
+  }
+
+  // Logic cho dropdown SẢN PHẨM
+  showDropdown() {
+    this.isDropdownVisible = true;
+  }
+
+  hideDropdown() {
+    this.isDropdownVisible = false;
+  }
+
+  // Logic cho dropdown BỘ SƯU TẬP
+  showCollectionDropdown() {
+    this.isCollectionDropdownVisible = true;
+  }
+
+  hideCollectionDropdown() {
+    this.isCollectionDropdownVisible = false;
+  }
+
+  filterByCollection(collection: string) {
+    this.selectedCollection = collection;
+    this.isDropdownVisible = false;
+    this.isCollectionDropdownVisible = false;
+    this.router.navigate(['/product-page'], {
+      queryParams: { collection: collection || null }
+    });
   }
 }
