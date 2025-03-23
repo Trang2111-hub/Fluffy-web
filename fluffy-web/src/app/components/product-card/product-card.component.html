@@ -24,7 +24,7 @@
             <i class="fas fa-shopping-bag"></i>
             <span>Thêm vào giỏ hàng</span>
         </button>
-        <button class="buy-now-btn">MUA NGAY</button>
+        <button (click)="buyNow()" class="buy-now-btn">MUA NGAY</button>
     </div>
    
     <button class="favorite-btn" (click)="toggleFavorite()" [class.active]="isFavorite">
