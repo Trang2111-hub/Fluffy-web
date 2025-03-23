@@ -380,20 +380,20 @@
       <section class="related-products" *ngIf="relatedProducts.length > 0">
         <div class="section-header">
           <h2 class="section-title">Sản phẩm liên quan</h2>
-          <button class="view-more-button" [routerLink]="['/product-page']">Xem thêm</button>
+          <button class="view-more-button" [routerLink]="['/product-page']" [queryParams]="{collection: product.collection}">Xem thêm</button>
         </div>
         <div class="products-slider">
-          <button class="slider-nav prev-button">
+          <button class="slider-nav prev-button" (click)="prevRelatedProduct()">
             <img src="assets/icons/product-detail/chevrons_left.png" alt="Previous">
           </button>
           <div class="related-products-grid">
             <app-product-card 
-              *ngFor="let product of relatedProducts.slice(0, displayCount)" 
+              *ngFor="let product of relatedProducts.slice(currentRelatedProductIndex, currentRelatedProductIndex + displayCount)" 
               [product]="product"
               (click)="navigateToRelatedProduct(product.product_id)">
             </app-product-card>
           </div>
-          <button class="slider-nav next-button">
+          <button class="slider-nav next-button" (click)="nextRelatedProduct()">
             <img src="assets/icons/product-detail/chevrons_right.png" alt="Next">
           </button>
         </div>

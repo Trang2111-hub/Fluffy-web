@@ -34,8 +34,7 @@ export const routes: Routes = [
   },
   {
     path: 'payment',
-    component: PaymentComponent,
-    canActivate: [authGuard]  
+    component: PaymentComponent
   },
   {
     path: 'account-settings',

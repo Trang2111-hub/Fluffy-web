@@ -69,4 +69,10 @@ export class ProductCardComponent {
   toggleFavorite(): void {
     this.isFavorite = !this.isFavorite;
   }
+  buyNow() {
+    if (this.product) {
+      // this.addToCart();
+      this.router.navigate(['/payment']);
+    }
+  }
 }

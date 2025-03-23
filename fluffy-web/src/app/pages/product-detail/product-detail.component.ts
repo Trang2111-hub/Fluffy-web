@@ -24,6 +24,8 @@ export class ProductDetailComponent implements OnInit {
   error: string | null = null;
   displayCount: number = 4;
   isFavorite: boolean = false;
+  currentRelatedProductIndex: number = 0;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +86,29 @@ export class ProductDetailComponent implements OnInit {
   loadRelatedProducts() {
     this.productService.getProducts().subscribe({
       next: (products) => {
-        this.relatedProducts = products.filter(p => p.product_id !== this.productId).slice(0, 4);
+        // First try to get products from the same collection
+        let relatedFromSameCollection = products.filter(p => 
+          p.product_id !== this.productId && 
+          p.collection === this.product.collection
+        );
+        
+        // If we have enough same-collection products, use those
+        if (relatedFromSameCollection.length >= 4) {
+          this.relatedProducts = relatedFromSameCollection.slice(0, 12);
+        } else {
+          // Otherwise, add some products from other collections to make up the difference
+          let otherProducts = products.filter(p => 
+            p.product_id !== this.productId && 
+            p.collection !== this.product.collection
+          );
+          
+          this.relatedProducts = [
+            ...relatedFromSameCollection,
+            ...otherProducts
+          ].slice(0, 12);
+        }
+        
+        this.currentRelatedProductIndex = 0;
       },
       error: (err) => {
         console.error('Lỗi khi lấy sản phẩm liên quan:', err);
@@ -156,4 +180,22 @@ export class ProductDetailComponent implements OnInit {
   toggleFavorite() {
     this.isFavorite = !this.isFavorite;
   }
+
+  // Thêm phương thức để lướt sản phẩm liên quan
+  prevRelatedProduct() {
+    this.currentRelatedProductIndex = Math.max(0, this.currentRelatedProductIndex - this.displayCount);
+    this.updateDisplayedRelatedProducts();
+  }
+
+  nextRelatedProduct() {
+    const maxStartIndex = Math.max(0, this.relatedProducts.length - this.displayCount);
+    this.currentRelatedProductIndex = Math.min(this.currentRelatedProductIndex + this.displayCount, maxStartIndex);
+    this.updateDisplayedRelatedProducts();
+  }
+
+  // Phương thức để cập nhật danh sách sản phẩm liên quan hiển thị
+  updateDisplayedRelatedProducts() {
+    // Không cần thay đổi relatedProducts, chỉ cần hiển thị phần tử phù hợp trong template
+  }
+
 }
