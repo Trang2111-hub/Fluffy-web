@@ -281,3 +281,73 @@ body.scrolled {
 .dropdown-item:hover {
     background-color: #F7D0E2; /* Nền màu hồng khi hover */
 }
+
+
+.user-account-container {
+    position: relative;
+    cursor: pointer;
+    z-index: 1002; 
+}
+  
+.user-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1003;
+    width: 160px;
+    margin-top: 5px;
+    
+}
+  
+.user-menu-dropdown .dropdown-item{
+    background: #fff;
+}
+
+.nav {
+    z-index: 1000;
+}
+  
+.sticky-nav {
+    z-index: 1000;
+}
+  
+.nav-icons {
+    z-index: 1001;
+    position: relative;
+}
+  
+.nav-icons > a, 
+.nav-icons > div {
+    z-index: 1001;
+    position: relative;
+}
+  
+.dropdown-item {
+    padding: 10px 15px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  
+.dropdown-item:hover {
+    background-color: #f8f8f8;
+    color: var(--primary-color);
+}
+  
+.user-menu-dropdown .dropdown-item {
+    z-index: 1004;
+    position: relative;
+}
+
+.header::after {
+    content: "";
+    display: table;
+    clear: both;
+}

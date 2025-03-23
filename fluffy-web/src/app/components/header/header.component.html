@@ -52,19 +52,31 @@
         </div>
       </a>
 
-      <!-- Tài khoản -->
-      <a *ngIf="!isLoggedIn" [routerLink]="['/login']">
+      <!-- Tài khoản - Khi chưa đăng nhập -->
+      <a *ngIf="!isLoggedIn" (click)="navigateToLogin()" style="cursor: pointer;">
         <div>
           <i class="fas fa-user"></i>
           <span>Đăng nhập/ <br> Đăng ký</span>
         </div>
       </a>
-      <a *ngIf="isLoggedIn" [routerLink]="['/account-settings']">
-        <div>
-          <i class="fas fa-user"></i>
-          <span>Tài khoản</span>
+      
+     <!-- Tài khoản - Khi đã đăng nhập -->
+    <div *ngIf="isLoggedIn" class="user-account-container">
+      <div (click)="toggleUserMenu($event)">
+        <i class="fas fa-user"></i>
+        <span>{{ userName || 'Tài khoản' }}<br><i class="fas fa-chevron-down"></i></span>
+      </div>
+      
+      <!-- User dropdown menu -->
+      <div class="user-menu-dropdown" *ngIf="isUserMenuOpen">
+        <div class="dropdown-item" (click)="navigateToAccountSettings()">
+          <i class="fas fa-cog"></i> Tài khoản
         </div>
-      </a>
+        <div class="dropdown-item" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 
