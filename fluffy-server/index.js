@@ -5,9 +5,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 const Product = require('./models/Product.js');
+const authRoutes = require('./routes/auth');
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 
 try {
   const db = require('./config/db');

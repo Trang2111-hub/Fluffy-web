@@ -87,6 +87,13 @@ export class SignupComponent implements OnInit {
   }
 
   /**
+   * Điều hướng đến trang đăng nhập
+   */
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  /**
    * Xử lý quy trình đăng ký
    */
   onSignup(): void {
@@ -129,7 +136,7 @@ export class SignupComponent implements OnInit {
       next: (response) => {
         // Hiển thị thông báo thành công rồi chuyển hướng đến trang đăng nhập
         alert('Đăng ký thành công! Vui lòng đăng nhập.');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { replaceUrl: true });
       },
       error: (error) => {
         // Xử lý khi đăng ký thất bại

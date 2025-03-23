@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
     
     // Nếu đã đăng nhập, chuyển hướng đến trang chính
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -74,6 +74,13 @@ export class LoginComponent implements OnInit {
    */
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  /**
+   * Điều hướng đến trang đăng ký
+   */
+  navigateToSignup(): void {
+    this.router.navigate(['/signup']);
   }
 
   /**

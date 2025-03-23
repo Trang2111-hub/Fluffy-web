@@ -46,7 +46,7 @@ export class AuthService {
    * URL của API backend
    * @private
    */
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'http://localhost:3000/api/auth'; 
   
   /**
    * Key lưu trữ token trong localStorage
@@ -63,7 +63,7 @@ export class AuthService {
   /**
    * BehaviorSubject để theo dõi trạng thái đăng nhập
    */
-  private loggedInStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
+  private loggedInStatus = new BehaviorSubject<boolean>(this.hasValidToken());
   
   /**
    * Observable để components khác có thể subscribe
@@ -74,7 +74,36 @@ export class AuthService {
    * Constructor - Inject HttpClient
    * @param http HttpClient để gọi API
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // Kiểm tra token khi khởi tạo service
+    this.checkTokenValidity();
+  }
+
+  /**
+   * Kiểm tra xem token có tồn tại và hợp lệ không
+   * @returns true nếu token tồn tại, false nếu không
+   */
+  private hasValidToken(): boolean {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    if (!token) return false;
+    
+    // Thêm kiểm tra JWT hết hạn nếu cần
+    // Ví dụ: kiểm tra payload trong token
+    
+    return true;
+  }
+
+  /**
+   * Kiểm tra token có còn hiệu lực không
+   * Có thể gọi API để kiểm tra
+   */
+  private checkTokenValidity(): void {
+    if (this.hasValidToken()) {
+      this.loggedInStatus.next(true);
+    } else {
+      this.loggedInStatus.next(false);
+    }
+  }
 
   /**
    * Đăng ký tài khoản mới
@@ -145,7 +174,7 @@ export class AuthService {
    * @returns true nếu đã đăng nhập, false nếu chưa
    */
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return this.loggedInStatus.value;
   }
 
   /**
