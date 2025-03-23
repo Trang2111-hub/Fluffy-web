@@ -262,3 +262,42 @@ body {
 .product-checkbox {
     margin-right: 8px;
 }
+
+
+.empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    text-align: center;
+  }
+  
+  .empty-cart .icon {
+    font-size: 80px; 
+    color: #f4a8b2; 
+    margin-bottom: 20px;
+  }
+  
+  .empty-cart .message {
+    font-size: 18px;
+    color: #EB5265; 
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  
+  .empty-cart .button {
+    padding: 10px 20px;
+    background: #EB5265;
+    color: white;
+    border: none;
+    border-radius: 20px; 
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: 200px; 
+  }
+  
+  .empty-cart .button:hover {
+    background: #d94457;
+  }
