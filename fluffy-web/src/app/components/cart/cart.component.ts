@@ -6,6 +6,7 @@ import { ProductService } from '../../../services/product.service';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../../../app/pages/product-page/models/product.model';
 import { Router, RouterModule } from '@angular/router';
+
 interface CartProduct extends Product {
   quantity: number;
   totalPrice: number;
@@ -34,7 +35,11 @@ export class CartComponent implements OnInit {
     return this.isOpen;
   }
 
-  constructor(private cartService: CartService, private productService: ProductService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.cartService.isCartOpen$.subscribe(isOpen => {
@@ -61,7 +66,7 @@ export class CartComponent implements OnInit {
             const discountPrice = originalPrice * (1 - discountPercentage / 100);
 
             // Đảm bảo quantity được gán đúng từ cartItem
-            const quantity = cartItem?.quantity ?? 1; 
+            const quantity = cartItem?.quantity ?? 1;
 
             return {
               ...product,
@@ -149,10 +154,16 @@ export class CartComponent implements OnInit {
   }
 
   goToCheckout() {
-    this.closeCart(); // Đóng giỏ hàng
+    this.closeCart();
     setTimeout(() => {
-    this.router.navigate(['/payment']);
-  }, 200); // Đợi 200ms để UI cập nhật
+      this.router.navigate(['/payment']);
+    }, 200);
   }
 
+  goToProductPage() {
+    this.closeCart();
+    setTimeout(() => {
+      this.router.navigate(['/product-page']);
+    }, 200);
+  }
 }
