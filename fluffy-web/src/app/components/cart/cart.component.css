@@ -1,10 +1,9 @@
-/* ======================= 🌟 CÀI ĐẶT CHUNG 🌟 ======================= */
 body {
-    background-color: #ffffff; /* Nền xám nhạt */
-    font-family: Arial, sans-serif; /* Font chữ mặc định */
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
 }
 
-/* Các thuộc tính cho popup */
+/* Giỏ hàng dạng popup toàn màn hình */
 :host {
     position: fixed;
     top: 0;
@@ -14,13 +13,12 @@ body {
     z-index: 1001;
     pointer-events: none;
 }
-
 :host.open {
     width: 100%;
     pointer-events: auto;
 }
 
-/* Overlay khi giỏ hàng hiển thị */
+/* Nền mờ khi mở giỏ hàng */
 .cart-overlay {
     position: fixed;
     top: 0;
@@ -32,16 +30,17 @@ body {
     animation: fadeIn 0.3s ease-out;
 }
 
+/* Khung chính của giỏ hàng */
 .container {
     position: absolute;
     top: 0;
     right: 0;
-    max-width: 786px; 
+    max-width: 786px;
     height: 100vh;
-    margin: 0 0 0 auto; 
-    background-color: #fff; 
-    border: 1px solid #e5e7eb; 
-    z-index: 1002; 
+    margin-left: auto;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    z-index: 1002;
     transform: translateX(100%);
     animation: slideIn 0.3s ease-out forwards;
     overflow-y: auto;
@@ -53,25 +52,24 @@ body {
     from { transform: translateX(100%); }
     to { transform: translateX(0); }
 }
-
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* ======================= HEADER (TIÊU ĐỀ) ======================= */
+/* Tiêu đề giỏ hàng */
 .header, .promo-code, .total, .checkout {
-    padding: 16px; 
-    border-bottom: 1px solid #e5e7eb; 
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
 }
 .header {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    border-bottom: 2px solid #000000; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000000;
 }
 .header h1 {
-    color: #EB5265; 
+    color: #EB5265;
     font-size: 1.875rem;
     font-weight: bold;
 }
@@ -83,101 +81,84 @@ body {
     cursor: pointer;
 }
 
-/* ======================= "CHỌN TẤT CẢ" & "XÓA TẤT CẢ" ======================= */
+/* Chọn tất cả / xóa tất cả */
 .select-all {
     display: flex;
-    align-items: center; 
-    background-color: #EB5265; 
-    color: #fff; 
-    padding: 10px 16px; 
-    width: 100%; 
-    box-sizing: border-box; 
-}
-
-.select-all div {
-    display: flex;
-    justify-content: space-between; 
     align-items: center;
-    width: 100%; 
+    background-color: #EB5265;
+    color: #fff;
+    padding: 10px 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
-
 .select-all input {
-    margin-right: 3px; 
+    margin-right: 3px;
 }
-
 .delete-all {
-    cursor: pointer; 
-    margin-left: 8px; 
+    cursor: pointer;
+    margin-left: 8px;
 }
 
-/* ======================= DANH SÁCH SẢN PHẨM ======================= */
+/* Danh sách sản phẩm */
 #cart-container {
     flex: 1;
     overflow-y: auto;
 }
-
 .cart-item {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     padding: 16px;
-    border-bottom: 1px solid #e5e7eb; 
+    border-bottom: 1px solid #e5e7eb;
 }
 .cart-item img {
-    width: 100px; height: 100px;
+    width: 100px;
+    height: 100px;
     margin-right: 16px;
 }
 .cart-item-details {
-    flex: 1; 
+    flex: 1;
 }
 .cart-item-details h2 {
     font-size: 1.125rem;
     font-weight: bold;
     color: #EB5265;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
 }
 
-.cart-item-total {
-    margin: 25px;
-    border-left: 1px solid var(--primary-color);
-    padding-left: 16px; 
-}
-
-/* ======================= ĐIỀU CHỈNH SỐ LƯỢNG ======================= */
+/* Điều chỉnh số lượng */
 .cart-item-controls {
     display: flex;
     align-items: center;
     margin-top: 8px;
 }
-
-.cart-item-controls button, 
-.cart-item-controls input, 
+.cart-item-controls button,
+.cart-item-controls input,
 .cart-item-controls select {
-    border: 1px solid var(--primary-color) ;
-    padding: 8px 16px; 
+    border: 1px solid var(--primary-color);
+    padding: 8px 16px;
     margin-right: 8px;
     background-color: #fef2f2;
-    color: var(--primary-color); 
-    cursor: pointer; 
+    color: var(--primary-color);
+    cursor: pointer;
 }
-
 .cart-item-controls input {
-    width: 30px; 
-    text-align: center; 
+    width: 50px;
+    padding: 8px;
+    text-align: center;
+    box-sizing: border-box;
 }
-
 .cart-item-controls select {
-    width: 120px; 
-    color: var(--primary-color); 
-    background-color: #fef2f2; 
+    width: 120px;
+    color: var(--primary-color);
+    background-color: #fef2f2;
 }
-
 .cart-item-controls button:hover,
 .cart-item-controls select:hover {
-    background-color: var(--primary-color); 
-    color: white; 
+    background-color: var(--primary-color);
+    color: white;
 }
 
-/* ======================= GIÁ SẢN PHẨM ======================= */
+/* Giá sản phẩm */
 .cart-item-prices {
     display: flex;
     align-items: center;
@@ -188,24 +169,27 @@ body {
     font-weight: bold;
 }
 .cart-item-prices .original-price {
-    text-decoration: line-through; /* Gạch ngang giá cũ */
-    color: #6b7280; /* Màu xám */
+    text-decoration: line-through;
+    color: #6b7280;
     margin-left: 16px;
 }
 .cart-item-prices .remove {
-    margin-left: auto; 
-    color: var(--primary-color); 
-    cursor: pointer; 
+    margin-left: auto;
+    color: var(--primary-color);
+    cursor: pointer;
 }
 
-/* ======================= TỔNG GIÁ SẢN PHẨM ======================= */
+/* Tổng giá từng sản phẩm */
 .cart-item-total {
+    margin: 25px;
+    padding-left: 16px;
+    border-left: 1px solid var(--primary-color);
     font-size: 1.125rem;
     font-weight: bold;
-    color: var(--primary-color); 
+    color: var(--primary-color);
 }
 
-/* =======================  MÃ KHUYẾN MÃI ======================= */
+/* Mã khuyến mãi */
 .promo-code {
     display: flex;
     justify-content: space-between;
@@ -214,9 +198,6 @@ body {
     color: #fff;
     margin-top: auto;
 }
-.promo-code i {
-    margin-right: 8px;
-}
 .promo-code button {
     background: none;
     border: none;
@@ -224,7 +205,7 @@ body {
     cursor: pointer;
 }
 
-/* ======================= 💲 TỔNG TIỀN 💲 ======================= */
+/* Tổng tiền */
 .total {
     display: flex;
     justify-content: space-between;
@@ -238,32 +219,30 @@ body {
     color: var(--primary-color);
 }
 
-/* =======================  NÚT THANH TOÁN ======================= */
+/* Nút thanh toán */
 .checkout button {
-    width: 100%; 
-    background-color: var(--primary-color); 
+    width: 100%;
+    background-color: var(--primary-color);
     color: #fff;
     padding: 12px;
     font-size: 1.125rem;
     font-weight: bold;
     border: none;
     cursor: pointer;
-    border-radius: 81px; 
-    transition: background-color 0.3s ease, transform 0.2s ease; 
+    border-radius: 81px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
-
 .checkout button:hover {
-    background-color: var(--primary-color); 
-    transform: scale(1.05); 
+    background-color: var(--primary-color);
+    transform: scale(1.05);
 }
 
-/* Product checkbox */
+/* Checkbox sản phẩm */
 .product-checkbox {
     margin-right: 8px;
 }
 
-
+/* Giao diện giỏ hàng trống */
 .empty-cart {
     display: flex;
     flex-direction: column;
@@ -271,33 +250,24 @@ body {
     justify-content: center;
     height: 80%;
     text-align: center;
-  }
-  
-  .empty-cart .icon {
-    font-size: 80px; 
-    color: #f4a8b2; 
-    margin-bottom: 20px;
-  }
-  
-  .empty-cart .message {
+}
+.empty-cart .message {
     font-size: 18px;
-    color: #EB5265; 
+    color: #EB5265;
     margin-bottom: 20px;
     font-weight: 500;
-  }
-  
-  .empty-cart .button {
+}
+.empty-cart .button {
     padding: 10px 20px;
     background: #EB5265;
     color: white;
     border: none;
-    border-radius: 20px; 
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
     text-transform: uppercase;
-    width: 200px; 
-  }
-  
-  .empty-cart .button:hover {
+    width: 200px;
+}
+.empty-cart .button:hover {
     background: #d94457;
-  }
+}
