@@ -12,7 +12,7 @@ interface CartProduct extends Product {
   totalPrice: number;
   selected: boolean;
   discount_price: number;
-  originalPriceNumber: number; // Thêm trường để lưu giá gốc dạng số
+  originalPriceNumber: number;
 }
 
 @Component({
@@ -62,8 +62,6 @@ export class CartComponent implements OnInit {
         next: (products) => {
           this.products = products.map((product: Product) => {
             const cartItem = cart.find((p: CartProduct) => p.product_id === product.product_id);
-
-            // Sử dụng regex để loại bỏ mọi ký tự không phải số
             const originalPrice = parseFloat(product.pricing.original_price.replace(/[^0-9]/g, '')) || 0;
             const discountPercentage = parseFloat(product.pricing.discount_percentage) || 0;
             const discountPrice = originalPrice * (1 - discountPercentage / 100);
@@ -71,8 +69,8 @@ export class CartComponent implements OnInit {
 
             return {
               ...product,
-              discount_price: discountPrice, // Giá đã giảm
-              originalPriceNumber: originalPrice, // Giá gốc dạng số
+              discount_price: discountPrice,
+              originalPriceNumber: originalPrice,
               quantity: quantity,
               totalPrice: discountPrice * quantity,
               selected: cartItem?.selected || false
@@ -80,7 +78,7 @@ export class CartComponent implements OnInit {
           });
           this.updateTotalAmount();
         },
-        error: (err) => console.error('Error loading cart from backend:', err)
+        error: (err) => console.error('Error loading cart:', err)
       });
     } else {
       this.products = [];
@@ -155,7 +153,14 @@ export class CartComponent implements OnInit {
     document.body.style.overflow = this.isCartOpenSubject.value ? 'hidden' : 'auto';
   }
 
+  // Cập nhật để hỗ trợ Flow 1: truyền sản phẩm đã chọn qua CartService
   goToCheckout() {
+    const selectedProducts = this.products.filter(product => product.selected);
+    if (selectedProducts.length === 0) {
+      alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán!');
+      return;
+    }
+    this.cartService.setCheckoutProducts(selectedProducts);
     this.closeCart();
     setTimeout(() => {
       this.router.navigate(['/payment']);

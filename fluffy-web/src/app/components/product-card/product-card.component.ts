@@ -35,8 +35,7 @@ export class ProductCardComponent {
   constructor(private cartService: CartService, private router: Router) {}
 
   addToCart(event: Event): void {
-    event.stopPropagation(); 
-
+    event.stopPropagation();
     const originalPrice = parseFloat(this.product.pricing.original_price.replace(/[,.]/g, ''));
     const discountPercentage = parseFloat(this.product.pricing.discount_percentage) || 0;
     const discountPrice = originalPrice * (1 - discountPercentage / 100);
@@ -47,15 +46,16 @@ export class ProductCardComponent {
       discount_price: discountPrice,
       original_price: originalPrice,
       image: this.product.image,
-      color: this.product.color,
-      size: this.product.size,
+      color: this.product.color.selected_colors[0] || 'Nâu',
+      size: this.product.size.available_sizes[0] || '35cm',
       rating: this.product.rating,
       description: this.product.description,
       collection: this.product.collection,
-      quantity: 1
+      quantity: 1,
+      totalPrice: discountPrice
     };
     this.cartService.addToCart(productToAdd);
-    this.cartService.openCart(); 
+    this.cartService.openCart();
   }
 
   calculateDiscountedPrice(originalPrice: string, discountPercentage: string): string {
@@ -69,10 +69,24 @@ export class ProductCardComponent {
   toggleFavorite(): void {
     this.isFavorite = !this.isFavorite;
   }
+
+  // Cập nhật để hỗ trợ Flow 2: truyền sản phẩm qua queryParams
   buyNow() {
-    if (this.product) {
-      // this.addToCart();
-      this.router.navigate(['/payment']);
-    }
+    const originalPrice = parseFloat(this.product.pricing.original_price.replace(/[,.]/g, ''));
+    const discountPercentage = parseFloat(this.product.pricing.discount_percentage) || 0;
+    const discountPrice = originalPrice * (1 - discountPercentage / 100);
+
+    const productToCheckout = {
+      product_id: this.product.product_id,
+      name: this.product.product_name,
+      image: this.product.image,
+      color: this.product.color.selected_colors[0] || 'Nâu',
+      size: this.product.size.available_sizes[0] || '35cm',
+      quantity: 1,
+      totalPrice: discountPrice
+    };
+    this.router.navigate(['/payment'], {
+      queryParams: { product: JSON.stringify(productToCheckout) }
+    });
   }
 }

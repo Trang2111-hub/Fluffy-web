@@ -6,8 +6,9 @@
     margin: auto;
     background-color: #F4F4F4;
     gap: 20px;
-}
-.checkout-form, .payment-method {
+  }
+  
+  .checkout-form, .payment-method {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -15,148 +16,194 @@
     flex: 1;
     margin-bottom: 20px;
     max-width: 800px;
-}
-.order-summary {
+  }
+  
+  /* Order Summary */
+  .order-summary {
     background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     flex: 1;
     margin-bottom: 20px;
     max-width: 400px;
-    height: 400px;
-}
-
-.checkout-form h2, .payment-method h2, .order-summary h2 {
+    /* Sử dụng flex để co giãn theo nội dung */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: fit-content; /* Tự động co lại theo content */
+  }
+  
+  .order-summary h2 {
+    text-align: center;
+    color: #EB5265;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .product {
+    display: flex;
+    align-items: flex-start; /* Căn theo đầu */
+    padding: 8px 0;
+    margin: 0 -5px; /* Bù trừ padding */
+    border-bottom: 1px solid #eee;
+  }
+  
+  .product:last-child {
+    border-bottom: none;
+  }
+  
+  .product img {
+    width: 70px; /* Giảm kích thước ảnh */
+    height: 70px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    flex-shrink: 0; /* Không bị co nhỏ */
+  }
+  
+  .product-details {
+    flex: 1;
+    padding-left: 10px;
+    color: #EB5265;
+  }
+  
+  .product-details .product-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+  }
+  
+  .product-details .info p {
+    color: #4b5563;
+    margin: 2px 0;
+    font-size: 13px;
+  }
+  
+  .price-info {
+    display: flex;
+    justify-content: space-between;
+    color: #4b5563;
+    font-size: 0.875rem;
+  }
+  
+  .promo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #4b5563;
+  }
+  
+  .promo i {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+  }
+  
+  .promo a {
+    color: #EB5265;
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  
+  .total-price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-top: 8px; /* Giảm khoảng cách */
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+  }
+  
+  .order-btn {
+    width: 100%;
+    background-color: #EB5265;
+    color: white;
+    margin-top: 12px; /* Giảm khoảng cách */
+    padding: 10px 16px;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .order-btn:hover {
+    background-color: #d81b60;
+  }
+  
+  /* Giữ nguyên các phần không liên quan */
+  .checkout-form h2, .payment-method h2 {
     color: #EB5265;
     font-size: 24px;
     margin: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.checkout-form .login {
+  }
+  
+  .checkout-form .login {
     display: flex;
-    justify-content: space-between;  
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-}
-.checkout-form .login img {
-    width: 30px;  
-    height: 30px;  
-    margin-right: 10px;  
-    vertical-align: middle; 
-}
-.checkout-form .login a {
+  }
+  
+  .checkout-form .login img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .checkout-form .login a {
     font-size: 16px;
     text-decoration: none;
     color: black;
     margin-bottom: 10px;
-    vertical-align: middle; 
-}
-.checkout-form input, .checkout-form select, .checkout-form textarea {
-    width: 100%; 
+    vertical-align: middle;
+  }
+  
+  .checkout-form input, .checkout-form select, .checkout-form textarea {
+    width: 100%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-sizing: border-box; 
-}
-.checkout-form input[type="checkbox"]{
+    box-sizing: border-box;
+  }
+  
+  .checkout-form input[type="checkbox"] {
     width: 16px;
     height: 16px;
     cursor: pointer;
     accent-color: #EB5265;
-}
-.checkout-form input[type="radio"] {
+  }
+  
+  .checkout-form input[type="radio"] {
     width: 16px;
     height: 16px;
     cursor: pointer;
     accent-color: #EB5265;
-}
-.checkbox-container {
+  }
+  
+  .checkbox-container {
     display: flex;
     align-items: center;
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
-}
-.checkbox-container span {
+  }
+  
+  .checkbox-container span {
     font-size: 16px;
-    margin-left: 5px; 
-}
-.bank-info {
+    margin-left: 5px;
+  }
+  
+  .bank-info {
     background-color: #F4F4F4;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-.product {
-    display: flex;
-    align-items: center;
-}
-.product img {
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-}
-.product-name {
-    font-weight: bold;
-    color: #EB5265;
-    font-size: 16px;
-    margin-left: 10px;
-}
-.info {
-    font-size: 12px;
-    margin: 10px;
-}
-.price-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-}
-.promo {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    width: 100%; 
-}
-.promo img {
-    width: 20px;  
-    height: 20px; 
-    margin-right: -90px;
-}
-.promo-text {
-    font-size: 16px;
-    color: black;
-}
-.promo-link {
-    font-size: 16px;
-    text-decoration: none;
-}
-
-.total-price {
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.order-btn {
-    display: block;
-    margin: 20px auto 0 auto;
-    background-color: #EB5265;
-    color: white;
-    padding: 12px 20px;
-    width: 50%;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.order-btn:hover {
-    background-color: #d81b60;
-}
+  }

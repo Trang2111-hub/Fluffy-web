@@ -10,6 +10,8 @@ export class CartService {
   isCartOpen$ = this.isCartOpen.asObservable();
   private cartItemCount = new BehaviorSubject<number>(0);
   cartItemCount$ = this.cartItemCount.asObservable();
+  private checkoutProducts = new BehaviorSubject<any[]>([]);
+  checkoutProducts$ = this.checkoutProducts.asObservable();
 
   constructor() {
     this.updateCartItemCount();
@@ -61,6 +63,15 @@ export class CartService {
 
   getCartItemCount(): Observable<number> {
     return this.cartItemCount$;
+  }
+
+  // Thêm để hỗ trợ Flow 1
+  setCheckoutProducts(products: any[]) {
+    this.checkoutProducts.next(products);
+  }
+
+  getCheckoutProducts(): Observable<any[]> {
+    return this.checkoutProducts$;
   }
 
   private updateCartItemCount(): void {
