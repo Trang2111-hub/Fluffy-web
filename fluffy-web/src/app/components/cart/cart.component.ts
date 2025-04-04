@@ -12,6 +12,7 @@ interface CartProduct extends Product {
   totalPrice: number;
   selected: boolean;
   discount_price: number;
+  originalPriceNumber: number; // Thêm trường để lưu giá gốc dạng số
 }
 
 @Component({
@@ -61,16 +62,17 @@ export class CartComponent implements OnInit {
         next: (products) => {
           this.products = products.map((product: Product) => {
             const cartItem = cart.find((p: CartProduct) => p.product_id === product.product_id);
-            const originalPrice = parseFloat(product.pricing.original_price.replace(/[,.]/g, ''));
+
+            // Sử dụng regex để loại bỏ mọi ký tự không phải số
+            const originalPrice = parseFloat(product.pricing.original_price.replace(/[^0-9]/g, '')) || 0;
             const discountPercentage = parseFloat(product.pricing.discount_percentage) || 0;
             const discountPrice = originalPrice * (1 - discountPercentage / 100);
-
-            // Đảm bảo quantity được gán đúng từ cartItem
             const quantity = cartItem?.quantity ?? 1;
 
             return {
               ...product,
-              discount_price: discountPrice,
+              discount_price: discountPrice, // Giá đã giảm
+              originalPriceNumber: originalPrice, // Giá gốc dạng số
               quantity: quantity,
               totalPrice: discountPrice * quantity,
               selected: cartItem?.selected || false

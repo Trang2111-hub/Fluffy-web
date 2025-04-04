@@ -41,7 +41,7 @@
           </div>
           <div class="cart-item-prices">
             <span>{{ product.discount_price | number }}đ</span>
-            <span class="original-price">{{ product.pricing.original_price | number }}đ</span>
+            <span class="original-price">{{ product.originalPriceNumber | number }}đ</span>
             <span class="remove" (click)="deleteProduct(product)">Xóa sản phẩm</span>
           </div>
         </div>
