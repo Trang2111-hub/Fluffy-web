@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { CartService } from '../../../services/cart.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,12 +26,14 @@ export class ProductDetailComponent implements OnInit {
   displayCount: number = 4;
   isFavorite: boolean = false;
   currentRelatedProductIndex: number = 0;
+  isExpanded: boolean = false; // Biến để kiểm soát trạng thái mở rộng mô tả
 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
+    private authService: AuthService,
     private cartService: CartService
   ) {
     this.updateDisplayCount();
@@ -178,8 +181,13 @@ export class ProductDetailComponent implements OnInit {
   }
 
   toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
+    if (!this.authService.isLoggedIn()) {
+      alert('Bạn phải đăng nhập mới sử dụng được tính năng yêu thích sản phẩm');
+      return; 
+    }
+    this.isFavorite = !this.isFavorite; 
   }
+
 
   // Thêm phương thức để lướt sản phẩm liên quan
   prevRelatedProduct() {
@@ -196,6 +204,10 @@ export class ProductDetailComponent implements OnInit {
   // Phương thức để cập nhật danh sách sản phẩm liên quan hiển thị
   updateDisplayedRelatedProducts() {
     // Không cần thay đổi relatedProducts, chỉ cần hiển thị phần tử phù hợp trong template
+  }
+
+  toggleDescription() {
+    this.isExpanded = !this.isExpanded; // Chuyển đổi trạng thái
   }
 
 }

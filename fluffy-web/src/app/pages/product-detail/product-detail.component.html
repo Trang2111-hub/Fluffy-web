@@ -119,13 +119,13 @@
       <!-- Mô tả sản phẩm -->
       <section class="product-description">
         <h2 class="section-title">Mô tả sản phẩm</h2>
-  
-        <p class="description-text">
+        
+        <p class="description-text" [class.expanded]="isExpanded" style="white-space: pre-line;">
           {{ product.description || 'Chưa có mô tả chi tiết cho sản phẩm này.' }}
         </p>
-  
-        <button class="read-more-button">
-          <span>Xem thêm</span>
+        
+        <button class="read-more-button" (click)="toggleDescription()">
+          <span>{{ isExpanded ? 'Thu gọn' : 'Xem thêm' }}</span>
           <img
             src="../../assets/icons/product-detail/read_more.png"
             class="read-more-icon"
