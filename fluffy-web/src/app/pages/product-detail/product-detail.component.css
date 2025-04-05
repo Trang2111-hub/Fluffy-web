@@ -268,7 +268,7 @@
   line-height: 28px;
   margin-top: 0;
   margin-bottom: 16px;
-  max-height: 112px; 
+  max-height: 160px; 
   overflow: hidden; 
   transition: max-height 0.3s ease;
 }
