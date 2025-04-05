@@ -13,6 +13,8 @@ interface CartProduct extends Product {
   selected: boolean;
   discount_price: number;
   originalPriceNumber: number;
+  selectedColor?: string; // Lưu màu đã chọn
+  selectedSize?: string;  // Lưu kích thước đã chọn
 }
 
 @Component({
@@ -73,7 +75,9 @@ export class CartComponent implements OnInit {
               originalPriceNumber: originalPrice,
               quantity: quantity,
               totalPrice: discountPrice * quantity,
-              selected: cartItem?.selected || false
+              selected: cartItem?.selected || false,
+              selectedColor: cartItem?.selectedColor || product.color?.selected_colors?.[0] || 'Không có màu',
+              selectedSize: cartItem?.selectedSize || product.size?.available_sizes?.[0] || 'Không có kích thước'
             };
           });
           this.updateTotalAmount();
@@ -84,6 +88,18 @@ export class CartComponent implements OnInit {
       this.products = [];
       this.totalAmount = 0;
     }
+  }
+
+  // Cập nhật phân loại khi người dùng thay đổi
+  updateProductClassification(product: CartProduct) {
+    this.updateProductTotalPrice(product);
+    const cart = this.cartService.getCart();
+    const updatedCart = cart.map((item: CartProduct) =>
+      item.product_id === product.product_id
+        ? { ...item, quantity: product.quantity, selectedColor: product.selectedColor, selectedSize: product.selectedSize }
+        : item
+    );
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   }
 
   closeCart() {
@@ -110,11 +126,6 @@ export class CartComponent implements OnInit {
   updateProductTotalPrice(product: CartProduct) {
     product.totalPrice = product.discount_price * product.quantity;
     this.updateTotalAmount();
-    const cart = this.cartService.getCart();
-    const updatedCart = cart.map((item: CartProduct) =>
-      item.product_id === product.product_id ? { ...item, quantity: product.quantity } : item
-    );
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
   }
 
   changeQuantity(product: CartProduct, increment: boolean) {
@@ -123,7 +134,7 @@ export class CartComponent implements OnInit {
     } else if (product.quantity > 1) {
       product.quantity--;
     }
-    this.updateProductTotalPrice(product);
+    this.updateProductClassification(product);
   }
 
   toggleSelectProduct(product: CartProduct) {
@@ -153,14 +164,19 @@ export class CartComponent implements OnInit {
     document.body.style.overflow = this.isCartOpenSubject.value ? 'hidden' : 'auto';
   }
 
-  // Cập nhật để hỗ trợ Flow 1: truyền sản phẩm đã chọn qua CartService
   goToCheckout() {
     const selectedProducts = this.products.filter(product => product.selected);
     if (selectedProducts.length === 0) {
       alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán!');
       return;
     }
-    this.cartService.setCheckoutProducts(selectedProducts);
+    // Truyền dữ liệu đã chọn sang PaymentComponent
+    const checkoutData = selectedProducts.map(product => ({
+      ...product,
+      color: product.selectedColor,
+      size: product.selectedSize
+    }));
+    this.cartService.setCheckoutProducts(checkoutData);
     this.closeCart();
     setTimeout(() => {
       this.router.navigate(['/payment']);

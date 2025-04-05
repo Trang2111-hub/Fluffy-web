@@ -257,6 +257,11 @@ body {
     margin-bottom: 20px;
     font-weight: 500;
 }
+.empty-cart .icon {
+    font-size: 200px; 
+    color: #EB5265; 
+    margin-bottom: 20px; 
+}
 .empty-cart .button {
     padding: 10px 20px;
     background: #EB5265;

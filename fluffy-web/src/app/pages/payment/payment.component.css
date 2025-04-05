@@ -207,3 +207,15 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
+  input[list] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  datalist {
+    display: none; /* Ẩn datalist mặc định, chỉ hiển thị khi nhập */
+  }
