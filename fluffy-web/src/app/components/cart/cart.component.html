@@ -32,11 +32,11 @@
             <button (click)="changeQuantity(product, false)" class="decrease">-</button>
             <input type="text" [(ngModel)]="product.quantity" class="quantity" readonly />
             <button (click)="changeQuantity(product, true)" class="increase">+</button>
-            <select class="tags">
-              <option *ngFor="let color of product.color.selected_colors">{{ color }}</option>
+            <select class="tags" [(ngModel)]="product.selectedColor" (change)="updateProductClassification(product)">
+              <option *ngFor="let color of product.color.selected_colors" [value]="color">{{ color }}</option>
             </select>
-            <select class="dimensions">
-              <option *ngFor="let size of product.size.available_sizes">{{ size }}</option>
+            <select class="dimensions" [(ngModel)]="product.selectedSize" (change)="updateProductClassification(product)">
+              <option *ngFor="let size of product.size.available_sizes" [value]="size">{{ size }}</option>
             </select>
           </div>
           <div class="cart-item-prices">

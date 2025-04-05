@@ -11,9 +11,49 @@
         <input type="text" [(ngModel)]="orderDetails.name" name="name" placeholder="Họ và tên" required>
         <input type="email" [(ngModel)]="orderDetails.email" name="email" placeholder="Email" required>
         <input type="tel" [(ngModel)]="orderDetails.phone" name="phone" placeholder="Số điện thoại" required>
-        <select [(ngModel)]="orderDetails.city" name="city"><option>Chọn Tỉnh/Thành phố</option></select>
-        <select [(ngModel)]="orderDetails.district" name="district"><option>Chọn Quận/Huyện</option></select>
-        <select [(ngModel)]="orderDetails.ward" name="ward"><option>Chọn Phường/Xã</option></select>
+        
+        <!-- Ô nhập Tỉnh/Thành phố -->
+        <input type="text" 
+               [(ngModel)]="orderDetails.city" 
+               name="city" 
+               placeholder="Chọn Tỉnh/Thành phố" 
+               list="cityList" 
+               (input)="onInputChange('city')" 
+               required>
+        <datalist id="cityList">
+          <option value="" disabled>Chọn Tỉnh/Thành phố</option>
+          <option *ngFor="let city of cityHistory" [value]="city">{{ city }}</option>
+          <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+        </datalist>
+
+        <!-- Ô nhập Quận/Huyện -->
+        <input type="text" 
+               [(ngModel)]="orderDetails.district" 
+               name="district" 
+               placeholder="Chọn Quận/Huyện" 
+               list="districtList" 
+               (input)="onInputChange('district')" 
+               required>
+        <datalist id="districtList">
+          <option value="" disabled>Chọn Quận/Huyện</option>
+          <option *ngFor="let district of districtHistory" [value]="district">{{ district }}</option>
+          <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+        </datalist>
+
+        <!-- Ô nhập Phường/Xã -->
+        <input type="text" 
+               [(ngModel)]="orderDetails.ward" 
+               name="ward" 
+               placeholder="Chọn Phường/Xã" 
+               list="wardList" 
+               (input)="onInputChange('ward')" 
+               required>
+        <datalist id="wardList">
+          <option value="" disabled>Chọn Phường/Xã</option>
+          <option *ngFor="let ward of wardHistory" [value]="ward">{{ ward }}</option>
+          <option *ngFor="let ward of wards" [value]="ward">{{ ward }}</option>
+        </datalist>
+
         <input type="text" [(ngModel)]="orderDetails.address" name="address" placeholder="Địa chỉ chi tiết" required>
         <textarea [(ngModel)]="orderDetails.note" name="note" placeholder="Ghi chú mua hàng (nếu có)"></textarea>
         <label class="checkbox-container">
@@ -52,7 +92,7 @@
 
   <!-- Order Summary -->
   <div class="order-summary">
-    <h2>Đơn hàng ({{ checkoutProducts.length }} sản phẩm)</h2>
+    <h2>Đơn hàng ({{ totalQuantity }} sản phẩm)</h2>
     <div *ngFor="let product of checkoutProducts" class="product">
       <img [src]="product.image" [alt]="product.name || product.product_name">
       <div class="product-details">
