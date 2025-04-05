@@ -275,11 +275,13 @@ body.scrolled {
     padding: 8px 16px;
     text-decoration: none;
     cursor: pointer;
-    background-color: #EB5265; /* Nền trắng khi không hover */
+    color: white !important; /* Màu chữ mặc định */
+    background-color: #EB5265 !important; /* Màu nền mặc định */
 }
 
 .dropdown-item:hover {
-    background-color: #F7D0E2; /* Nền màu hồng khi hover */
+    color: #EB5265 !important; /* Màu chữ khi hover */
+    background-color: #F7D0E2 !important; /* Màu nền khi hover */
 }
 
 
